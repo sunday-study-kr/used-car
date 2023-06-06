@@ -3,7 +3,7 @@
 -- USE `usedcar`;
 
 CREATE TABLE `user` (
-  `id` bigint PRIMARY KEY,
+  `id` VARCHAR(22) PRIMARY KEY,
   `nickname` varchar(30) not null,
   `manner_temperature` float default 36.5,
   `rate_of_redealing` float,
@@ -14,19 +14,19 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `bookmark_used_car_post` (
-  `id` bigint PRIMARY KEY,
-  `post_id` string,
-  `followed_user_id` string,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `post_id` VARCHAR(22),
+  `followed_user_id` VARCHAR(22),
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
 );
 
 CREATE TABLE `matching` (
-  `id` bigint PRIMARY KEY,
-  `post_id` string,
-  `post_user_id` string,
-  `match_request_user_id` string,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `post_id` VARCHAR(22),
+  `post_user_id` VARCHAR(22),
+  `match_request_user_id` VARCHAR(22),
   `status` string,
   `created_at` timestamp,
   `updated_at` timestamp,
@@ -34,9 +34,9 @@ CREATE TABLE `matching` (
 );
 
 CREATE TABLE `praise` (
-  `id` bigint PRIMARY KEY,
-  `user_id` bigint,
-  `praiser_id` bigint,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `user_id` VARCHAR(22),
+  `praiser_id` VARCHAR(22),
   `praise_type` varchar(50) not null,
   `amount` int,
   `created_at` timestamp,
@@ -45,9 +45,9 @@ CREATE TABLE `praise` (
 );
 
 CREATE TABLE `review` (
-  `id` bigint PRIMARY KEY,
-  `user_id` bigint,
-  `reviewer_id` bigint,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `user_id` VARCHAR(22),
+  `reviewer_id` VARCHAR(22),
   `content` TEXT,
   `created_at` timestamp,
   `updated_at` timestamp,
@@ -55,8 +55,8 @@ CREATE TABLE `review` (
 );
 
 CREATE TABLE `badge` (
-  `id` bigint PRIMARY KEY,
-  `user_id` bigint,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `user_id` VARCHAR(22),
   `badge_name` varchar(15) not null,
   `is_represent` tinyint(1),
   `created_at` timestamp,
@@ -65,9 +65,9 @@ CREATE TABLE `badge` (
 );
 
 CREATE TABLE `user_car_selling_post` (
-  `id` bigint PRIMARY KEY,
-  `car_id` bigint,
-  `user_id` bigint,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `car_id` VARCHAR(22),
+  `user_id` VARCHAR(22),
   `chat` int,
   `focus` int,
   `look` int,
@@ -79,8 +79,8 @@ CREATE TABLE `user_car_selling_post` (
 );
 
 CREATE TABLE `used_car` (
-  `id` bigint PRIMARY KEY,
-  `car_id` bigint,
+  `id` VARCHAR(22) PRIMARY KEY,
+  `car_id` VARCHAR(22),
   `license_number` string,
   `price` int,
   `save_price` int,
@@ -90,7 +90,7 @@ CREATE TABLE `used_car` (
 );
 
 CREATE TABLE `car` (
-  `id` bigint PRIMARY KEY,
+  `id` VARCHAR(22) PRIMARY KEY,
   `car_type` string,
   `manufacturer` strig,
   `model_name` string,
