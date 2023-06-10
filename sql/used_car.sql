@@ -71,8 +71,8 @@ CREATE TABLE `user_car_selling_post` (
   `chat` int,
   `focus` int,
   `look` int,
-  `introduce` string,
-  `deal_address` string,
+  `introduce` VARCHAR(512),
+  `deal_address` VARCHAR(256),
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -81,23 +81,78 @@ CREATE TABLE `user_car_selling_post` (
 CREATE TABLE `used_car` (
   `id` VARCHAR(22) PRIMARY KEY,
   `car_id` VARCHAR(22),
-  `license_number` string,
+  `license_number` VARCHAR(256),
   `price` int,
   `save_price` int,
-  `distance` bigint,
+  `insurance_id` VARCHAR(22),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
 CREATE TABLE `car` (
   `id` VARCHAR(22) PRIMARY KEY,
-  `car_type` string,
-  `manufacturer` strig,
-  `model_name` string,
+  `car_type` VARCHAR(50),
+  `company` VARCHAR(50),
+  `model_name` VARCHAR(70),
+  `grade` VARCHAR(40),
+  `grade_detail` VARCHAR(40),
   `year` int,
+  `distance` int,
   `displacement` int,
-  `fuel_type` string
+  `fuel_type` VARCHAR(30)
 );
+
+CREATE TABLE `insurance`(
+  `id` VARCHAR(22) PRIMARY KEY,
+  `is_loss` BOOLEAN ,
+  `is_steal` BOOLEAN ,
+  `is_water` BOOLEAN ,
+  `is_rent` BOOLEAN ,
+  `is_sales` BOOLEAN ,
+  `is_public` BOOLEAN
+);
+
+CREATE TABLE `unsubscribed`(
+   `id` VARCHAR(22) PRIMARY KEY,
+   `insuracne_id` VARCHAR(22),
+   `start_at` timestamp,
+   `end_at` timestamp
+);
+
+CREATE TABLE `owner_accident`(
+   `id` VARCHAR(22) PRIMARY KEY,
+   `insuracne_id` VARCHAR(22),
+   `day` timestamp,
+   `part_price` int,
+   `wages_price` int,
+   `coation_price`int,
+   `total_price` int
+);
+
+CREATE TABLE `opponent_accident`(
+    `id` VARCHAR(22) PRIMARY KEY,
+    `insuracne_id` VARCHAR(22),
+    `day` timestamp,
+    `part_price` int,
+    `wages_price` int,
+    `coation_price`int,
+    `total_price` int
+);
+
+CREATE TABLE `change_owner`(
+    `id` VARCHAR(22) PRIMARY KEY,
+    `insuracne_id` VARCHAR(22),
+    `change_day` timestamp
+);
+
+CREATE TABLE `change_number`(
+    `id` VARCHAR(22) PRIMARY KEY,
+    `insuracne_id` VARCHAR(22),
+    `change_day` timestamp,
+    `change_name` VARCHAR(50),
+    `is_first` BOOLEAN
+);
+
 
 ALTER TABLE `praise` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
@@ -124,3 +179,15 @@ ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`user_id`) REFERENCES `user
 ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`car_id`) REFERENCES `used_car` (`id`);
 
 ALTER TABLE `used_car` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
+
+ALTER TABLE `used_car` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
+
+ALTER TABLE `unsubscribed` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+
+ALTER TABLE `owner_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
+
+ALTER TABLE `opponent_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+
+ALTER TABLE `change_owner` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+
+ALTER TABLE `change_number` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
