@@ -1,3 +1,7 @@
+### CUSTOM DEFINED ###
+.env
+data
+
 HELP.md
 .gradle
 build/
