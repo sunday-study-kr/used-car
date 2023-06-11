@@ -24,10 +24,10 @@ CREATE TABLE `bookmark_used_car_post` (
 
 CREATE TABLE `matching` (
   `id` VARCHAR(22) PRIMARY KEY,
-  `post_id` VARCHAR(22),
+  `post_id` VARCHAR(22) UNIQUE,
   `post_user_id` VARCHAR(22),
   `match_request_user_id` VARCHAR(22),
-  `status` string,
+  `status` bool,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
