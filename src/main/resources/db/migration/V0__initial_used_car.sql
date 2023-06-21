@@ -3,7 +3,7 @@
 -- USE `usedcar`;
 
 CREATE TABLE `user` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `nickname` varchar(30) not null,
   `manner_temperature` float default 36.5,
   `rate_of_redealing` float,
@@ -14,7 +14,7 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `bookmark_used_car_post` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `post_id` VARCHAR(22),
   `followed_user_id` VARCHAR(22),
   `created_at` timestamp,
@@ -23,7 +23,7 @@ CREATE TABLE `bookmark_used_car_post` (
 );
 
 CREATE TABLE `matching` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `post_id` VARCHAR(22) UNIQUE,
   `post_user_id` VARCHAR(22),
   `match_request_user_id` VARCHAR(22),
@@ -34,7 +34,7 @@ CREATE TABLE `matching` (
 );
 
 CREATE TABLE `praise` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `user_id` VARCHAR(22),
   `praiser_id` VARCHAR(22),
   `praise_type` varchar(50) not null,
@@ -45,7 +45,7 @@ CREATE TABLE `praise` (
 );
 
 CREATE TABLE `review` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `user_id` VARCHAR(22),
   `reviewer_id` VARCHAR(22),
   `content` TEXT,
@@ -55,7 +55,7 @@ CREATE TABLE `review` (
 );
 
 CREATE TABLE `badge` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `user_id` VARCHAR(22),
   `badge_name` varchar(15) not null,
   `is_represent` tinyint(1),
@@ -65,7 +65,7 @@ CREATE TABLE `badge` (
 );
 
 CREATE TABLE `user_car_selling_post` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `car_id` VARCHAR(22),
   `user_id` VARCHAR(22),
   `chat` int,
@@ -79,7 +79,7 @@ CREATE TABLE `user_car_selling_post` (
 );
 
 CREATE TABLE `used_car` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `car_id` VARCHAR(22),
   `license_number` VARCHAR(256),
   `price` int,
@@ -90,7 +90,7 @@ CREATE TABLE `used_car` (
 );
 
 CREATE TABLE `car` (
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `car_type` VARCHAR(50),
   `company` VARCHAR(50),
   `model_name` VARCHAR(70),
@@ -103,7 +103,7 @@ CREATE TABLE `car` (
 );
 
 CREATE TABLE `insurance`(
-  `id` VARCHAR(22) PRIMARY KEY,
+  `id` VARCHAR(36) PRIMARY KEY,
   `is_loss` BOOLEAN ,
   `is_steal` BOOLEAN ,
   `is_water` BOOLEAN ,
@@ -113,14 +113,14 @@ CREATE TABLE `insurance`(
 );
 
 CREATE TABLE `unsubscribed`(
-   `id` VARCHAR(22) PRIMARY KEY,
+   `id` VARCHAR(36) PRIMARY KEY,
    `insuracne_id` VARCHAR(22),
    `start_at` timestamp,
    `end_at` timestamp
 );
 
 CREATE TABLE `owner_accident`(
-   `id` VARCHAR(22) PRIMARY KEY,
+   `id` VARCHAR(36) PRIMARY KEY,
    `insuracne_id` VARCHAR(22),
    `day` timestamp,
    `part_price` int,
@@ -130,7 +130,7 @@ CREATE TABLE `owner_accident`(
 );
 
 CREATE TABLE `opponent_accident`(
-    `id` VARCHAR(22) PRIMARY KEY,
+    `id` VARCHAR(36) PRIMARY KEY,
     `insuracne_id` VARCHAR(22),
     `day` timestamp,
     `part_price` int,
@@ -140,13 +140,13 @@ CREATE TABLE `opponent_accident`(
 );
 
 CREATE TABLE `change_owner`(
-    `id` VARCHAR(22) PRIMARY KEY,
+    `id` VARCHAR(36) PRIMARY KEY,
     `insuracne_id` VARCHAR(22),
     `change_day` timestamp
 );
 
 CREATE TABLE `change_number`(
-    `id` VARCHAR(22) PRIMARY KEY,
+    `id` VARCHAR(36) PRIMARY KEY,
     `insuracne_id` VARCHAR(22),
     `change_day` timestamp,
     `change_name` VARCHAR(50),

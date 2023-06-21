@@ -3,6 +3,7 @@ package sundaystudy.kr.usedcar.module.Insurance.Entity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
 
@@ -28,5 +29,10 @@ class Insurance(
 ) {
 
     @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     val id: UUID = UUID.randomUUID()
+
+
+    @OneToMany(mappedBy = "insurance")
+    lateinit var unsubscribed : MutableList<Unsubscribed>
 }
