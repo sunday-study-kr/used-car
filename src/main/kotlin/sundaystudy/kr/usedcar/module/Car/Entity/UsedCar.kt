@@ -13,6 +13,6 @@ class UsedCar(
 ) {
 
     @Id
-    @Column(columnDefinition = "VARCHAR(36)")
+    @Column(columnDefinition = "BINARY(16)")
     val id : UUID = UUID.randomUUID()
 }

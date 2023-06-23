@@ -29,8 +29,8 @@ class Insurance(
 ) {
 
     @Id
-    @Column(nullable = false)
-    val id: String = UUID.randomUUID().toString()
+    @Column(nullable = false, columnDefinition = "BINARY(16)")
+    val id: UUID = UUID.randomUUID()
 
 
     @OneToMany(mappedBy = "insurance")

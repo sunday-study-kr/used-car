@@ -14,12 +14,12 @@ class Unsubscribed(
     var endAt : Date
 
 ) {
-    @JoinColumn(name = "insuracne_id")
+    @JoinColumn(name = "insuracne_id", columnDefinition = "BINARY(16)")
     @ManyToOne(fetch = FetchType.LAZY)
     lateinit var insurance: Insurance
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "BINARY(16)")
     val id : String = UUID.randomUUID().toString()
 
 }
