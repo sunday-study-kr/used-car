@@ -66,7 +66,7 @@ CREATE TABLE `badge` (
 
 CREATE TABLE `user_car_selling_post` (
   `id` VARCHAR(36) PRIMARY KEY,
-  `car_id` VARCHAR(22),
+  `used_car_id` VARCHAR(22),
   `user_id` VARCHAR(22),
   `chat` int,
   `focus` int,
@@ -176,7 +176,7 @@ ALTER TABLE `matching` ADD FOREIGN KEY (`match_request_user_id`) REFERENCES `use
 
 ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`car_id`) REFERENCES `used_car` (`id`);
+ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`used_car_id`) REFERENCES `used_car` (`id`);
 
 ALTER TABLE `used_car` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
