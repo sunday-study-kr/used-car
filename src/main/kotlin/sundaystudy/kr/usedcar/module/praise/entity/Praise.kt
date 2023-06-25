@@ -1,16 +1,12 @@
 package sundaystudy.kr.usedcar.module.praise.entity
 
 import jakarta.persistence.*
-import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
-import sundaystudy.kr.usedcar.global.audit.SoftDelete
 import sundaystudy.kr.usedcar.module.user.entity.User
 import java.util.*
 
 @Entity
-@SoftDelete
-@EntityListeners(AuditListener::class)
 class Praise(
         val praiseType: String,
 

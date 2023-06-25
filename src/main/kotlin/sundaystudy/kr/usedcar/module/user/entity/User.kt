@@ -7,12 +7,9 @@ import jakarta.persistence.Id
 import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
-import sundaystudy.kr.usedcar.global.audit.SoftDelete
 import java.util.UUID
 
 @Entity
-@SoftDelete
-@EntityListeners(AuditListener::class)
 class User(
         var nickname: String
 ): Auditable {
