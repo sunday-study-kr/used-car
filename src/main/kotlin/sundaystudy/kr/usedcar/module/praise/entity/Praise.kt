@@ -29,5 +29,6 @@ class Praise(
         this.amount++
     }
 
+    @Embedded
     override var baseTime: BaseTime = BaseTime()
 }

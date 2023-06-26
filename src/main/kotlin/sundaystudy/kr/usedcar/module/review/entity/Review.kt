@@ -1,7 +1,6 @@
 package sundaystudy.kr.usedcar.module.review.entity
 
 import jakarta.persistence.*
-import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 import sundaystudy.kr.usedcar.module.user.entity.User
@@ -25,5 +24,6 @@ class Review(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
+    @Embedded
     override var baseTime: BaseTime = BaseTime()
 }

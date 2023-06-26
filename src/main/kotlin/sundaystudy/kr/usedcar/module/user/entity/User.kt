@@ -1,10 +1,9 @@
 package sundaystudy.kr.usedcar.module.user.entity
 
 import jakarta.persistence.Column
+import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
-import jakarta.persistence.EntityListeners
 import jakarta.persistence.Id
-import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 import java.util.UUID
@@ -26,6 +25,7 @@ class User(
     var responseRate: Double = 0.0
         protected set
 
+    @Embedded
     override var baseTime: BaseTime = BaseTime()
 
     // TODO Double 필드 3개에 대한 업데이트 로직 함수 작성
