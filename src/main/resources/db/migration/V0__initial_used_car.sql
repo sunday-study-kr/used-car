@@ -3,30 +3,30 @@
 -- USE `usedcar`;
 
 CREATE TABLE `user` (
-  `id` VARCHAR(36) PRIMARY KEY,
+  `id` BINARY(16) PRIMARY KEY,
   `nickname` varchar(30) not null,
   `manner_temperature` float default 36.5,
-  `rate_of_redealing` float,
-  `response_rate` float,
+  `rate_of_re_dealing` float default 0.0,
+  `response_rate` float default 0.0,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
 );
 
 CREATE TABLE `bookmark_used_car_post` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `post_id` VARCHAR(22),
-  `followed_user_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `post_id` BINARY(16),
+  `followed_user_id` BINARY(16),
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
 );
 
 CREATE TABLE `matching` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `post_id` VARCHAR(22) UNIQUE,
-  `post_user_id` VARCHAR(22),
-  `match_request_user_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `post_id` BINARY(16) UNIQUE,
+  `post_user_id` BINARY(16),
+  `match_request_user_id` BINARY(16),
   `status` bool,
   `created_at` timestamp,
   `updated_at` timestamp,
@@ -34,9 +34,9 @@ CREATE TABLE `matching` (
 );
 
 CREATE TABLE `praise` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `user_id` VARCHAR(22),
-  `praiser_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `user_id` BINARY(16),
+  `praiser_id` BINARY(16),
   `praise_type` varchar(50) not null,
   `amount` int,
   `created_at` timestamp,
@@ -45,9 +45,9 @@ CREATE TABLE `praise` (
 );
 
 CREATE TABLE `review` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `user_id` VARCHAR(22),
-  `reviewer_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `user_id` BINARY(16),
+  `reviewer_id` BINARY(16),
   `content` TEXT,
   `created_at` timestamp,
   `updated_at` timestamp,
@@ -55,8 +55,8 @@ CREATE TABLE `review` (
 );
 
 CREATE TABLE `badge` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `user_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `user_id` BINARY(16),
   `badge_name` varchar(15) not null,
   `is_represent` tinyint(1),
   `created_at` timestamp,
@@ -65,9 +65,9 @@ CREATE TABLE `badge` (
 );
 
 CREATE TABLE `user_car_selling_post` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `used_car_id` VARCHAR(22),
-  `user_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `used_car_id` BINARY(16),
+  `user_id` BINARY(16),
   `chat` int,
   `focus` int,
   `look` int,
@@ -79,18 +79,18 @@ CREATE TABLE `user_car_selling_post` (
 );
 
 CREATE TABLE `used_car` (
-  `id` VARCHAR(36) PRIMARY KEY,
-  `car_id` VARCHAR(22),
+  `id` BINARY(16) PRIMARY KEY,
+  `car_id` BINARY(16),
   `license_number` VARCHAR(256),
   `price` int,
   `save_price` int,
-  `insurance_id` VARCHAR(22),
+  `insurance_id` BINARY(16),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
 CREATE TABLE `car` (
-  `id` VARCHAR(36) PRIMARY KEY,
+  `id` BINARY(16) PRIMARY KEY,
   `car_type` VARCHAR(50),
   `company` VARCHAR(50),
   `model_name` VARCHAR(70),
@@ -103,7 +103,7 @@ CREATE TABLE `car` (
 );
 
 CREATE TABLE `insurance`(
-  `id` VARCHAR(36) PRIMARY KEY,
+  `id` BINARY(16) PRIMARY KEY,
   `is_loss` BOOLEAN ,
   `is_steal` BOOLEAN ,
   `is_water` BOOLEAN ,
@@ -113,15 +113,15 @@ CREATE TABLE `insurance`(
 );
 
 CREATE TABLE `unsubscribed`(
-   `id` VARCHAR(36) PRIMARY KEY,
-   `insuracne_id` VARCHAR(22),
+   `id` BINARY(16) PRIMARY KEY,
+   `insuracne_id` BINARY(16),
    `start_at` timestamp,
    `end_at` timestamp
 );
 
 CREATE TABLE `owner_accident`(
-   `id` VARCHAR(36) PRIMARY KEY,
-   `insuracne_id` VARCHAR(22),
+   `id` BINARY(16) PRIMARY KEY,
+   `insuracne_id` BINARY(16),
    `day` timestamp,
    `part_price` int,
    `wages_price` int,
@@ -130,8 +130,8 @@ CREATE TABLE `owner_accident`(
 );
 
 CREATE TABLE `opponent_accident`(
-    `id` VARCHAR(36) PRIMARY KEY,
-    `insuracne_id` VARCHAR(22),
+    `id` BINARY(16) PRIMARY KEY,
+    `insuracne_id` BINARY(16),
     `day` timestamp,
     `part_price` int,
     `wages_price` int,
@@ -140,14 +140,14 @@ CREATE TABLE `opponent_accident`(
 );
 
 CREATE TABLE `change_owner`(
-    `id` VARCHAR(36) PRIMARY KEY,
-    `insuracne_id` VARCHAR(22),
+    `id` BINARY(16) PRIMARY KEY,
+    `insuracne_id` BINARY(16),
     `change_day` timestamp
 );
 
 CREATE TABLE `change_number`(
-    `id` VARCHAR(36) PRIMARY KEY,
-    `insuracne_id` VARCHAR(22),
+    `id` BINARY(16) PRIMARY KEY,
+    `insuracne_id` BINARY(16),
     `change_day` timestamp,
     `change_name` VARCHAR(50),
     `is_first` BOOLEAN
