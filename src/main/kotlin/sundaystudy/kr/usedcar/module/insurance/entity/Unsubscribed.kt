@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.Insurance.Entity
+package sundaystudy.kr.usedcar.module.insurance.entity
 
 import jakarta.persistence.*
 import java.util.Date
@@ -19,7 +19,7 @@ class Unsubscribed(
     lateinit var insurance: Insurance
 
     @Id
-    @Column(nullable = false)
-    val id : String = UUID.randomUUID().toString()
+    @Column(columnDefinition = "BINARY(16)")
+    val id: UUID = UUID.randomUUID()
 
 }
