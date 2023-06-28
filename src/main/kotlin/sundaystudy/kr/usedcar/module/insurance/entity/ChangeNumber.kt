@@ -7,11 +7,11 @@ import java.util.*
 @Entity
 class ChangeNumber(
     @Column(name = "change_day")
-    var changeDay : LocalDateTime,
+    var changeDay: LocalDateTime,
     @Column(name = "change_name")
-    var changeName : String,
+    var changeName: String,
     @Column(name = "is_first")
-    var isFirst : Boolean
+    var isFirst: Boolean,
 ) {
 
     @Id

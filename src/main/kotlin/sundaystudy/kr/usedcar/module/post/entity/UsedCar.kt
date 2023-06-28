@@ -14,13 +14,13 @@ import java.util.UUID
 class UsedCar(
 
     @Column(name = "license_number")
-    var licenseNumber : String,
+    var licenseNumber: String,
 
     @Column(name = "price")
-    var price : Int,
+    var price: Int,
 
     @Column(name = "save_price")
-    var savePrice : Int,
+    var savePrice: Int,
 
     // created_at , updated_at
 ) {
@@ -31,9 +31,9 @@ class UsedCar(
 
     @JoinColumn(name = "car_id")
     @OneToOne
-    lateinit var car : Car
+    lateinit var car: Car
 
     @JoinColumn(name = "insurance_id")
     @OneToOne
-    lateinit var insurance : Insurance
+    lateinit var insurance: Insurance
 }

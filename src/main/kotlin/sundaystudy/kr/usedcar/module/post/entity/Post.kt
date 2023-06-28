@@ -10,15 +10,15 @@ import java.util.*
 @Entity
 class Post(
     @Column(name = "chat")
-    var chat : Int,
+    var chat: Int,
     @Column(name = "focus")
-    var focus : Int,
+    var focus: Int,
     @Column(name = "look")
-    var look : Int,
+    var look: Int,
     @Column(name = "introduce")
-    var introduce : String,
+    var introduce: String,
     @Column(name = "deal_address")
-    var dealAddress : String
+    var dealAddress: String,
 
     // created_at , updated_at , deleted_at
 ) {
@@ -29,8 +29,7 @@ class Post(
 
     @OneToOne
     @JoinColumn(name = "used_car_id")
-    lateinit var usedCar : UsedCar
+    lateinit var usedCar: UsedCar
 
     // user와 연관관계 추가
-
 }

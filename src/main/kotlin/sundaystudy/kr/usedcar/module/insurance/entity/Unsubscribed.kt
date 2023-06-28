@@ -5,13 +5,13 @@ import java.util.Date
 import java.util.UUID
 
 @Entity
-@Table(name="unsubscribed")
+@Table(name = "unsubscribed")
 class Unsubscribed(
     @Column(name = "start_at")
-    var startAt : Date,
+    var startAt: Date,
 
     @Column(name = "end_at")
-    var endAt : Date
+    var endAt: Date,
 
 ) {
     @JoinColumn(name = "insuracne_id", columnDefinition = "BINARY(16)")
@@ -21,5 +21,4 @@ class Unsubscribed(
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
-
 }

@@ -8,19 +8,19 @@ import java.util.*
 class OwnerAccident(
 
     @Column(name = "day")
-    var Day : LocalDateTime,
+    var Day: LocalDateTime,
 
     @Column(name = "part_price")
-    var partPrice : Int,
+    var partPrice: Int,
 
     @Column(name = "wages_price")
-    var wagesPrice : Int,
+    var wagesPrice: Int,
 
     @Column(name = "coation_price")
-    var coationPrice : Int,
+    var coationPrice: Int,
 
     @Column(name = "total_price")
-    var totalPrice : Int
+    var totalPrice: Int,
 ) {
     @Id
     @Column(columnDefinition = "BINARY(16)")
@@ -28,6 +28,5 @@ class OwnerAccident(
 
     @JoinColumn(name = "insuracne_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance : Insurance
-
+    lateinit var insurance: Insurance
 }

@@ -10,8 +10,8 @@ import java.util.UUID
 
 @Entity
 class User(
-        var nickname: String
-): Auditable {
+    var nickname: String,
+) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
