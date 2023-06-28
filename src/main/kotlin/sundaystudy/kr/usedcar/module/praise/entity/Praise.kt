@@ -8,16 +8,16 @@ import java.util.*
 
 @Entity
 class Praise(
-        val praiseType: String,
+    val praiseType: String,
 
-        @JoinColumn
-        @OneToOne(fetch = FetchType.LAZY)
-        val user: User,
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    val user: User,
 
-        @JoinColumn
-        @OneToOne(fetch = FetchType.LAZY)
-        val praiser: User
-): Auditable {
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    val praiser: User,
+) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()

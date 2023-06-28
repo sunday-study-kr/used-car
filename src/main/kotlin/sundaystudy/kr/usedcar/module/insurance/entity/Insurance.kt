@@ -14,7 +14,7 @@ import java.util.UUID
 class Insurance(
     @Column(name = "is_loss")
     val isLoss: Boolean,
-    @Column(name ="is_steal")
+    @Column(name = "is_steal")
     val isSteal: Boolean,
 
     @Column(name = "is_water")
@@ -27,16 +27,15 @@ class Insurance(
     val isSales: Boolean,
 
     @Column(name = "is_public")
-    val isPublic: Boolean
+    val isPublic: Boolean,
 ) {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-
     @OneToMany(mappedBy = "insurance")
-    lateinit var unsubscribed : MutableList<Unsubscribed>
+    lateinit var unsubscribed: MutableList<Unsubscribed>
 
     @OneToMany(mappedBy = "insurance")
     lateinit var ownerAccident: MutableList<OwnerAccident>
@@ -45,11 +44,11 @@ class Insurance(
     lateinit var opponentAccident: MutableList<OpponentAccident>
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeOwner : MutableList<ChangeOwner>
+    lateinit var changeOwner: MutableList<ChangeOwner>
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeNumber : MutableList<ChangeNumber>
+    lateinit var changeNumber: MutableList<ChangeNumber>
 
     @OneToOne(mappedBy = "insurance")
-    lateinit var usedCar : UsedCar
+    lateinit var usedCar: UsedCar
 }

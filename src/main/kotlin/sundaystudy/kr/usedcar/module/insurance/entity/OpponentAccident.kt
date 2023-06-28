@@ -20,15 +20,13 @@ class OpponentAccident(
     var coationPrice: Int,
 
     @Column(name = "total_price")
-    var totalPrice: Int
+    var totalPrice: Int,
 ) {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     var id: UUID = UUID.randomUUID()
 
-
     @JoinColumn(name = "insuracne_id")
     @ManyToOne(fetch = FetchType.LAZY)
     lateinit var insurance: Insurance
-
 }

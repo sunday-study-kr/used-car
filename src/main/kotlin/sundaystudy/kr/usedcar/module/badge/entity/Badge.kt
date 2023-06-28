@@ -8,12 +8,12 @@ import java.util.*
 
 @Entity
 class Badge(
-        val badgeName: String,
+    val badgeName: String,
 
-        @JoinColumn
-        @OneToOne(fetch = FetchType.LAZY)
-        var user: User
-): Auditable {
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    var user: User,
+) : Auditable {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")

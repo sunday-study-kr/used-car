@@ -9,16 +9,16 @@ import java.util.*
 @Entity
 class Review(
 
-        var content: String,
+    var content: String,
 
-        @JoinColumn
-        @OneToOne(fetch = FetchType.LAZY)
-        var user: User,
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    var user: User,
 
-        @JoinColumn
-        @OneToOne(fetch = FetchType.LAZY)
-        var reviewer: User
-): Auditable {
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    var reviewer: User,
+) : Auditable {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
