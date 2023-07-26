@@ -5,6 +5,7 @@ import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.review.dto.request.ReviewRequest
 import sundaystudy.kr.usedcar.module.review.dto.response.ReviewResponse
 import sundaystudy.kr.usedcar.module.review.repository.ReviewRepository
+import java.util.*
 
 @Service
 class ReviewService(
@@ -18,11 +19,11 @@ class ReviewService(
         TODO("Not yet implemented")
     }
 
-    fun getReview(): ReviewResponse {
+    fun getReview(id: UUID): ReviewResponse {
         TODO("Not yet implemented")
     }
 
-    fun getAllReviewsByMemberId(): List<ReviewResponse> {
+    fun getAllReviewsByMemberId(userId: UUID): List<ReviewResponse> {
         TODO("Not yet implemented")
     }
 }

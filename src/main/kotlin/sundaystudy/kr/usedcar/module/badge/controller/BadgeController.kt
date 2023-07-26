@@ -1,9 +1,7 @@
 package sundaystudy.kr.usedcar.module.badge.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.module.badge.dto.response.BadgeResponse
 import sundaystudy.kr.usedcar.module.badge.service.BadgeService
 import java.util.*
@@ -14,10 +12,12 @@ class BadgeController(
     private val badgeService: BadgeService,
 ) {
     @PostMapping("{id}")
-    fun selectRepresentBadge(id: UUID) =
+    fun selectRepresentBadge(@PathVariable id: UUID): ResponseEntity<Any> {
         badgeService.selectRepresentBadge(id)
+        return ResponseEntity.ok().build()
+    }
 
     @GetMapping
-    fun getAllBadges(): List<BadgeResponse> =
-        badgeService.getAllBadges()
+    fun getAllBadges(): ResponseEntity<List<BadgeResponse>> =
+        ResponseEntity.ok(badgeService.getAllBadges())
 }

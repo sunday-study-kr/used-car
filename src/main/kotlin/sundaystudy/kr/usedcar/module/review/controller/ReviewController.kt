@@ -1,5 +1,7 @@
 package sundaystudy.kr.usedcar.module.review.controller
 
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.review.dto.request.ReviewRequest
@@ -13,18 +15,18 @@ class ReviewController(
     private val reviewService: ReviewService,
 ) {
     @PostMapping
-    fun saveReview(reviewRequest: ReviewRequest): IdResponse =
-        reviewService.saveReview(reviewRequest)
+    fun saveReview(reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
+        ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(reviewRequest))
 
     @GetMapping
-    fun getAllReview(): List<ReviewResponse> =
-        reviewService.getAllReviews()
+    fun getAllReview(): ResponseEntity<List<ReviewResponse>> =
+        ResponseEntity.ok(reviewService.getAllReviews())
 
     @GetMapping("{id}")
-    fun getReview(): ReviewResponse =
-        reviewService.getReview()
+    fun getReview(@PathVariable id: UUID): ResponseEntity<ReviewResponse> =
+        ResponseEntity.ok(reviewService.getReview(id))
 
-    @GetMapping("members/{memberId}")
-    fun getReview(@PathVariable memberId: UUID): List<ReviewResponse> =
-        reviewService.getAllReviewsByMemberId()
+    @GetMapping("members/{userId}")
+    fun getReviewsByMemberId(@PathVariable userId: UUID): ResponseEntity<List<ReviewResponse>> =
+        ResponseEntity.ok(reviewService.getAllReviewsByMemberId(userId))
 }
