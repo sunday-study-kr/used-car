@@ -39,6 +39,7 @@ CREATE TABLE `praise` (
   `praiser_id` BINARY(16),
   `praise_type` varchar(50) not null,
   `amount` int,
+  `content` LONGTEXT,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -48,7 +49,7 @@ CREATE TABLE `review` (
   `id` BINARY(16) PRIMARY KEY,
   `user_id` BINARY(16),
   `reviewer_id` BINARY(16),
-  `content` TEXT,
+  `content` LONGTEXT,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
