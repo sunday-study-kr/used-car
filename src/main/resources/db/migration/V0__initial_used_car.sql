@@ -115,14 +115,14 @@ CREATE TABLE `insurance`(
 
 CREATE TABLE `unsubscribed`(
    `id` BINARY(16) PRIMARY KEY,
-   `insuracne_id` BINARY(16),
+   `insurance_id` BINARY(16),
    `start_at` timestamp,
    `end_at` timestamp
 );
 
 CREATE TABLE `owner_accident`(
    `id` BINARY(16) PRIMARY KEY,
-   `insuracne_id` BINARY(16),
+   `insurance_id` BINARY(16),
    `day` timestamp,
    `part_price` int,
    `wages_price` int,
@@ -132,7 +132,7 @@ CREATE TABLE `owner_accident`(
 
 CREATE TABLE `opponent_accident`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `day` timestamp,
     `part_price` int,
     `wages_price` int,
@@ -142,13 +142,13 @@ CREATE TABLE `opponent_accident`(
 
 CREATE TABLE `change_owner`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `change_day` timestamp
 );
 
 CREATE TABLE `change_number`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `change_day` timestamp,
     `change_name` VARCHAR(50),
     `is_first` BOOLEAN
@@ -183,12 +183,12 @@ ALTER TABLE `used_car` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
 ALTER TABLE `used_car` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `unsubscribed` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `unsubscribed` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `owner_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
+ALTER TABLE `owner_accident` ADD FOREIGN KEY (`insurance_id`) REFERENCES  `insurance` (id);
 
-ALTER TABLE `opponent_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `opponent_accident` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `change_owner` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `change_owner` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `change_number` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
+ALTER TABLE `change_number` ADD FOREIGN KEY (`insurance_id`) REFERENCES  `insurance` (id);
