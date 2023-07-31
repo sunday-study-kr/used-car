@@ -1,12 +1,6 @@
 package sundaystudy.kr.usedcar.module.usedcar.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToOne
-import jakarta.persistence.Table
-import sundaystudy.kr.usedcar.module.usedcar.insurance.entity.Insurance
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
@@ -30,10 +24,10 @@ class UsedCar(
     val id: UUID = UUID.randomUUID()
 
     @JoinColumn(name = "car_id")
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     var car: Car? = null
 
     @JoinColumn(name = "insurance_id")
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     var insurance: Insurance? = null
 }

@@ -32,9 +32,11 @@ class UsedCarController(
     }
 
     @DeleteMapping("/{id}")
-    fun deleteUsedCarById(@PathVariable id : UUID)
+    fun deleteUsedCarById(@PathVariable id : UUID) : ResponseEntity<Unit>
     {
         usedCarService.deleteUsedCar(id)
+
+        return ResponseEntity.status(HttpStatus.OK).body(Unit)
     }
 
 }

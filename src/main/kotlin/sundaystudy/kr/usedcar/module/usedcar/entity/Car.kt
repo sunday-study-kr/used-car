@@ -1,9 +1,6 @@
 package sundaystudy.kr.usedcar.module.usedcar.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.OneToOne
+import jakarta.persistence.*
 import java.util.*
 
 @Entity
@@ -32,6 +29,6 @@ class Car(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToOne(mappedBy = "car")
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
     var usedCar: UsedCar? = null
 }

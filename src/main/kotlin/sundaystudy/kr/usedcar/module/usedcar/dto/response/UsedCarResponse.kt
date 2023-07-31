@@ -1,5 +1,5 @@
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.CarResponse
-import sundaystudy.kr.usedcar.module.usedcar.insurance.dto.response.InsuranceResponse
+import sundaystudy.kr.usedcar.module.usedcar.dto.response.InsuranceResponse
 
 data class UsedCarResponse(
     var licenseNumber: String,

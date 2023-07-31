@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.usedcar.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -6,7 +6,6 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
-import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
 import java.util.UUID
 
 @Entity

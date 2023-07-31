@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.usedcar.insurance.dto.detail
+package sundaystudy.kr.usedcar.module.usedcar.dto.detail
 
 import java.util.*
 

@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.usedcar.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
 import java.util.Date

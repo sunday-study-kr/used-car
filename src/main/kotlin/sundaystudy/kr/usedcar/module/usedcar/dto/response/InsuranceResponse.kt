@@ -1,7 +1,6 @@
-package sundaystudy.kr.usedcar.module.usedcar.insurance.dto.response
+package sundaystudy.kr.usedcar.module.usedcar.dto.response
 
-import sundaystudy.kr.usedcar.module.usedcar.insurance.dto.detail.*
-
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.*
 
 data class InsuranceResponse(
     val isLoss: Boolean,
