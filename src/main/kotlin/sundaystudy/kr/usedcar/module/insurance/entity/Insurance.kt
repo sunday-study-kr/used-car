@@ -36,20 +36,20 @@ class Insurance(
 
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var unsubscribed : MutableList<Unsubscribed>
+    var unsubscribed : MutableList<Unsubscribed> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var ownerAccident: MutableList<OwnerAccident>
+    var ownerAccident: MutableList<OwnerAccident> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var opponentAccident: MutableList<OpponentAccident>
+    var opponentAccident: MutableList<OpponentAccident> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeOwner : MutableList<ChangeOwner>
+    var changeOwner : MutableList<ChangeOwner> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeNumber : MutableList<ChangeNumber>
+    var changeNumber : MutableList<ChangeNumber> = mutableListOf()
 
     @OneToOne(mappedBy = "insurance")
-    lateinit var usedCar : UsedCar
+    var usedCar : UsedCar? = null
 }
