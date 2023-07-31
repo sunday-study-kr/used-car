@@ -26,7 +26,7 @@ class OpponentAccident(
     @Column(columnDefinition = "BINARY(16)")
     var id: UUID = UUID.randomUUID()
 
-    @JoinColumn(name = "insuracne_id")
+    @JoinColumn(name = "insurance_id")
     @ManyToOne(fetch = FetchType.LAZY)
     lateinit var insurance: Insurance
 }

@@ -17,9 +17,11 @@ class Matching(
     var post: Post? = null
 
     @ManyToOne
+    @JoinColumn(name = "match_request_user_id")
     var requestUser: User? = null
 
     @ManyToOne
+    @JoinColumn(name = "post_user_id")
     var postOwner: User? = null
 
     @Embedded

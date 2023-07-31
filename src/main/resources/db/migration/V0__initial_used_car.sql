@@ -39,7 +39,7 @@ CREATE TABLE `praise` (
   `praiser_id` BINARY(16),
   `praise_type` varchar(50) not null,
   `amount` int,
-  `content` LONGTEXT,
+  `content` tinytext,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -49,7 +49,7 @@ CREATE TABLE `review` (
   `id` BINARY(16) PRIMARY KEY,
   `user_id` BINARY(16),
   `reviewer_id` BINARY(16),
-  `content` LONGTEXT,
+  `content` tinytext,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -154,6 +154,24 @@ CREATE TABLE `change_number`(
     `is_first` BOOLEAN
 );
 
+CREATE TABLE `post` (
+    `id` BINARY(16) PRIMARY KEY,
+    `chat` int,
+    `focus` int,
+    `look` int,
+    `introduce` VARCHAR(1000),
+    `deal_address` VARCHAR(100),
+    `used_car_id` BINARY(16)
+);
+
+CREATE TABLE `bookmark` (
+    `id` BINARY(16) PRIMARY KEY,
+    `post_id` BINARY(16),
+    `user_id` BINARY(16),
+    `created_at` timestamp,
+    `updated_at` timestamp,
+    `deleted_at` timestamp
+);
 
 ALTER TABLE `praise` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
