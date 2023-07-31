@@ -39,6 +39,7 @@ CREATE TABLE `praise` (
   `praiser_id` BINARY(16),
   `praise_type` varchar(50) not null,
   `amount` int,
+  `content` tinytext,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -48,7 +49,7 @@ CREATE TABLE `review` (
   `id` BINARY(16) PRIMARY KEY,
   `user_id` BINARY(16),
   `reviewer_id` BINARY(16),
-  `content` TEXT,
+  `content` tinytext,
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -114,14 +115,14 @@ CREATE TABLE `insurance`(
 
 CREATE TABLE `unsubscribed`(
    `id` BINARY(16) PRIMARY KEY,
-   `insuracne_id` BINARY(16),
+   `insurance_id` BINARY(16),
    `start_at` timestamp,
    `end_at` timestamp
 );
 
 CREATE TABLE `owner_accident`(
    `id` BINARY(16) PRIMARY KEY,
-   `insuracne_id` BINARY(16),
+   `insurance_id` BINARY(16),
    `day` timestamp,
    `part_price` int,
    `wages_price` int,
@@ -131,7 +132,7 @@ CREATE TABLE `owner_accident`(
 
 CREATE TABLE `opponent_accident`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `day` timestamp,
     `part_price` int,
     `wages_price` int,
@@ -141,18 +142,36 @@ CREATE TABLE `opponent_accident`(
 
 CREATE TABLE `change_owner`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `change_day` timestamp
 );
 
 CREATE TABLE `change_number`(
     `id` BINARY(16) PRIMARY KEY,
-    `insuracne_id` BINARY(16),
+    `insurance_id` BINARY(16),
     `change_day` timestamp,
     `change_name` VARCHAR(50),
     `is_first` BOOLEAN
 );
 
+CREATE TABLE `post` (
+    `id` BINARY(16) PRIMARY KEY,
+    `chat` int,
+    `focus` int,
+    `look` int,
+    `introduce` VARCHAR(1000),
+    `deal_address` VARCHAR(100),
+    `used_car_id` BINARY(16)
+);
+
+CREATE TABLE `bookmark` (
+    `id` BINARY(16) PRIMARY KEY,
+    `post_id` BINARY(16),
+    `user_id` BINARY(16),
+    `created_at` timestamp,
+    `updated_at` timestamp,
+    `deleted_at` timestamp
+);
 
 ALTER TABLE `praise` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
@@ -182,12 +201,12 @@ ALTER TABLE `used_car` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
 ALTER TABLE `used_car` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `unsubscribed` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `unsubscribed` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `owner_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
+ALTER TABLE `owner_accident` ADD FOREIGN KEY (`insurance_id`) REFERENCES  `insurance` (id);
 
-ALTER TABLE `opponent_accident` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `opponent_accident` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `change_owner` ADD FOREIGN KEY (`insuracne_id`) REFERENCES `insurance` (id);
+ALTER TABLE `change_owner` ADD FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (id);
 
-ALTER TABLE `change_number` ADD FOREIGN KEY (`insuracne_id`) REFERENCES  `insurance` (id);
+ALTER TABLE `change_number` ADD FOREIGN KEY (`insurance_id`) REFERENCES  `insurance` (id);

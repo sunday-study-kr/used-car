@@ -1,14 +1,15 @@
 package sundaystudy.kr.usedcar.module.user.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Embedded
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+import jakarta.persistence.*
+import org.hibernate.annotations.Where
+import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
-import java.util.UUID
+import java.util.*
 
 @Entity
+@Where(clause = "deleted_at is null")
+@EntityListeners(AuditListener::class)
 class User(
     var nickname: String,
 ) : Auditable {
