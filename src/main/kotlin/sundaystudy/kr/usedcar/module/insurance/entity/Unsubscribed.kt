@@ -14,9 +14,9 @@ class Unsubscribed(
     var endAt: Date,
 
 ) {
-    @JoinColumn(name = "insuracne_id", columnDefinition = "BINARY(16)")
+    @JoinColumn(name = "insurance_id", columnDefinition = "BINARY(16)")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance: Insurance? = null
 
     @Id
     @Column(columnDefinition = "BINARY(16)")

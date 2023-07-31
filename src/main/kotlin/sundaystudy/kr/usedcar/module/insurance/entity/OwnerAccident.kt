@@ -8,25 +8,26 @@ import java.util.*
 class OwnerAccident(
 
     @Column(name = "day")
-    var Day: LocalDateTime,
+    var Day : LocalDateTime,
 
     @Column(name = "part_price")
-    var partPrice: Int,
+    var partPrice : Int,
 
     @Column(name = "wages_price")
-    var wagesPrice: Int,
+    var wagesPrice : Int,
 
     @Column(name = "coation_price")
-    var coationPrice: Int,
+    var coationPrice : Int,
 
     @Column(name = "total_price")
-    var totalPrice: Int,
+    var totalPrice : Int
 ) {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     var id: UUID = UUID.randomUUID()
 
-    @JoinColumn(name = "insuracne_id")
+    @JoinColumn(name = "insurance_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance : Insurance? = null
+
 }

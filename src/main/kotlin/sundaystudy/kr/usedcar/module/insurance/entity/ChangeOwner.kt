@@ -16,5 +16,5 @@ class ChangeOwner(
 
     @JoinColumn(name = "insuracne_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance: Insurance? = null
 }
