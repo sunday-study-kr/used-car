@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.post.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -29,7 +29,7 @@ class Post(
 
     @OneToOne
     @JoinColumn(name = "used_car_id")
-    lateinit var usedCar: UsedCar
+    var usedCar: UsedCar? = null
 
     // user와 연관관계 추가
 }

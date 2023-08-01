@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
 import java.util.Date
@@ -16,7 +16,7 @@ class Unsubscribed(
 ) {
     @JoinColumn(name = "insurance_id", columnDefinition = "BINARY(16)")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance: Insurance? = null
 
     @Id
     @Column(columnDefinition = "BINARY(16)")

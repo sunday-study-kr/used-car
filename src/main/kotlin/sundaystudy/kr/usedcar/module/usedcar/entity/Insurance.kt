@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -6,7 +6,6 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
-import sundaystudy.kr.usedcar.module.post.entity.UsedCar
 import java.util.UUID
 
 @Entity
@@ -14,7 +13,7 @@ import java.util.UUID
 class Insurance(
     @Column(name = "is_loss")
     val isLoss: Boolean,
-    @Column(name = "is_steal")
+    @Column(name ="is_steal")
     val isSteal: Boolean,
 
     @Column(name = "is_water")
@@ -27,28 +26,29 @@ class Insurance(
     val isSales: Boolean,
 
     @Column(name = "is_public")
-    val isPublic: Boolean,
+    val isPublic: Boolean
 ) {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToMany(mappedBy = "insurance")
-    lateinit var unsubscribed: MutableList<Unsubscribed>
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var ownerAccident: MutableList<OwnerAccident>
+    var unsubscribed : MutableList<Unsubscribed> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var opponentAccident: MutableList<OpponentAccident>
+    var ownerAccident: MutableList<OwnerAccident> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeOwner: MutableList<ChangeOwner>
+    var opponentAccident: MutableList<OpponentAccident> = mutableListOf()
 
     @OneToMany(mappedBy = "insurance")
-    lateinit var changeNumber: MutableList<ChangeNumber>
+    var changeOwner : MutableList<ChangeOwner> = mutableListOf()
+
+    @OneToMany(mappedBy = "insurance")
+    var changeNumber : MutableList<ChangeNumber> = mutableListOf()
 
     @OneToOne(mappedBy = "insurance")
-    lateinit var usedCar: UsedCar
+    var usedCar : UsedCar? = null
 }

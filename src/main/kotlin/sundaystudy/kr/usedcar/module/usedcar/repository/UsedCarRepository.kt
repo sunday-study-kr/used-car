@@ -1,7 +1,7 @@
-package sundaystudy.kr.usedcar.module.post.repository
+package sundaystudy.kr.usedcar.module.usedcar.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
-import sundaystudy.kr.usedcar.module.post.entity.UsedCar
+import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
 import java.util.UUID
 
 interface UsedCarRepository : JpaRepository<UsedCar, UUID>

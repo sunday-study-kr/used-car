@@ -1,11 +1,11 @@
-package sundaystudy.kr.usedcar.module.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*
 
 @Entity
-class OwnerAccident(
+class OpponentAccident(
 
     @Column(name = "day")
     var Day: LocalDateTime,
@@ -20,13 +20,15 @@ class OwnerAccident(
     var coationPrice: Int,
 
     @Column(name = "total_price")
-    var totalPrice: Int,
+    var totalPrice: Int
 ) {
     @Id
     @Column(columnDefinition = "BINARY(16)")
     var id: UUID = UUID.randomUUID()
 
-    @JoinColumn(name = "insurance_id")
+
+    @JoinColumn(name = "insuracne_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance: Insurance? = null
+
 }

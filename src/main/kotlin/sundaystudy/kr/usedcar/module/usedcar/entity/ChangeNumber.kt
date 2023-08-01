@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.insurance.entity
+package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -20,5 +20,5 @@ class ChangeNumber(
 
     @JoinColumn(name = "insurance_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    lateinit var insurance: Insurance
+    var insurance: Insurance? = null
 }
