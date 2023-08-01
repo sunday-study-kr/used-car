@@ -29,6 +29,6 @@ class Car(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToOne(mappedBy = "car")
-    lateinit var usedCar: UsedCar
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
+    var usedCar: UsedCar? = null
 }
