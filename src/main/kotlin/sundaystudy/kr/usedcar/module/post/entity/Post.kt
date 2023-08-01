@@ -1,10 +1,8 @@
-package sundaystudy.kr.usedcar.module.usedcar.entity
+package sundaystudy.kr.usedcar.module.post.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToOne
+import jakarta.persistence.*
+import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
+import sundaystudy.kr.usedcar.module.user.entity.User
 import java.util.*
 
 @Entity
@@ -27,9 +25,11 @@ class Post(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "used_car_id")
     var usedCar: UsedCar? = null
 
-    // user와 연관관계 추가
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    var user : User? = null
 }
