@@ -161,7 +161,8 @@ CREATE TABLE `post` (
     `look` int,
     `introduce` VARCHAR(1000),
     `deal_address` VARCHAR(100),
-    `used_car_id` BINARY(16)
+    `used_car_id` BINARY(16),
+    `user_id` BINARY(16)
 );
 
 CREATE TABLE `bookmark` (
