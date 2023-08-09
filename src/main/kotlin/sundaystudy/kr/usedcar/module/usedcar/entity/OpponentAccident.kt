@@ -30,5 +30,4 @@ class OpponentAccident(
     @JoinColumn(name = "insurance_id")
     @ManyToOne(fetch = FetchType.LAZY)
     var insurance: Insurance? = null
-
 }

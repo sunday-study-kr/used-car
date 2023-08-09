@@ -21,4 +21,5 @@ class Unsubscribed(
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
+
 }

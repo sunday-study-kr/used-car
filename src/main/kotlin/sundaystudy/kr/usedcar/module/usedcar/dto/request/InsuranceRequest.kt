@@ -3,7 +3,6 @@ import sundaystudy.kr.usedcar.module.usedcar.dto.detail.*
 import java.util.*
 
 data class InsuranceRequest(
-    val usedCarId : UUID,
     val isLoss: Boolean,
     val isSteal: Boolean,
     val isWater: Boolean,
