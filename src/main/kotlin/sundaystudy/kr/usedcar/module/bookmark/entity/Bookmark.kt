@@ -5,7 +5,7 @@ import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 import sundaystudy.kr.usedcar.module.post.entity.Post
 
-import sundaystudy.kr.usedcar.module.user.entity.User
+import sundaystudy.kr.usedcar.module.member.entity.Member
 
 @Entity
 class Bookmark(
@@ -18,7 +18,7 @@ class Bookmark(
     var post: Post? = null
 
     @ManyToOne
-    var user: User? = null
+    var member: Member? = null
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()

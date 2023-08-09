@@ -4,7 +4,7 @@ import java.util.*
 
 data class BadgeResponse(
     var id: UUID,
-    var userId: UUID,
+    var memberId: UUID,
     var badgeName: String,
     var isRepresent: Boolean,
 )

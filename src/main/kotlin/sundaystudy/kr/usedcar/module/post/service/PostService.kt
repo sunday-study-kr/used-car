@@ -15,7 +15,7 @@ class PostService(
         TODO()
     }
 
-    fun getPostByUserId(userId : UUID) : List<PostResponse>
+    fun getPostByMemberId(memberId : UUID) : List<PostResponse>
     {
         TODO()
     }

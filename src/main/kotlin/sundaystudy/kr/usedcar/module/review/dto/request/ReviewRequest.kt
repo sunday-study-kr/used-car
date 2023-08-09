@@ -4,6 +4,6 @@ import java.util.*
 
 data class ReviewRequest(
     var content: String,
-    var userId: UUID,
+    var memberId: UUID,
     var reviewerId: UUID,
 )

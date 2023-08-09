@@ -4,7 +4,7 @@ import java.util.*
 
 data class PraiseResponse(
     var id: UUID,
-    var userId: UUID,
+    var memberId: UUID,
     var praiseType: String,
     var amount: Int,
 )

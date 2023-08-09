@@ -2,12 +2,16 @@
 -- CREATE SCHEMA `usedcar`;
 -- USE `usedcar`;
 
-CREATE TABLE `user` (
+CREATE TABLE `member` (
   `id` BINARY(16) PRIMARY KEY,
-  `nickname` varchar(30) not null,
+  `nickname` varchar(30),
   `manner_temperature` float default 36.5,
   `rate_of_re_dealing` float default 0.0,
   `response_rate` float default 0.0,
+  `client_id` varchar(150) not null,
+  `auth_provider` varchar(10) not null,
+  `role` varchar(10),
+  `refresh_token` varchar(255),
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -16,7 +20,7 @@ CREATE TABLE `user` (
 CREATE TABLE `bookmark_used_car_post` (
   `id` BINARY(16) PRIMARY KEY,
   `post_id` BINARY(16),
-  `followed_user_id` BINARY(16),
+  `followed_member_id` BINARY(16),
   `created_at` timestamp,
   `updated_at` timestamp,
   `deleted_at` timestamp
@@ -25,8 +29,8 @@ CREATE TABLE `bookmark_used_car_post` (
 CREATE TABLE `matching` (
   `id` BINARY(16) PRIMARY KEY,
   `post_id` BINARY(16) UNIQUE,
-  `post_user_id` BINARY(16),
-  `match_request_user_id` BINARY(16),
+  `post_member_id` BINARY(16),
+  `match_request_member_id` BINARY(16),
   `status` bool,
   `created_at` timestamp,
   `updated_at` timestamp,
@@ -35,7 +39,7 @@ CREATE TABLE `matching` (
 
 CREATE TABLE `praise` (
   `id` BINARY(16) PRIMARY KEY,
-  `user_id` BINARY(16),
+  `member_id` BINARY(16),
   `praiser_id` BINARY(16),
   `praise_type` varchar(50) not null,
   `amount` int,
@@ -47,7 +51,7 @@ CREATE TABLE `praise` (
 
 CREATE TABLE `review` (
   `id` BINARY(16) PRIMARY KEY,
-  `user_id` BINARY(16),
+  `member_id` BINARY(16),
   `reviewer_id` BINARY(16),
   `content` tinytext,
   `created_at` timestamp,
@@ -57,7 +61,7 @@ CREATE TABLE `review` (
 
 CREATE TABLE `badge` (
   `id` BINARY(16) PRIMARY KEY,
-  `user_id` BINARY(16),
+  `member_id` BINARY(16),
   `badge_name` varchar(15) not null,
   `is_represent` tinyint(1),
   `created_at` timestamp,
@@ -65,10 +69,10 @@ CREATE TABLE `badge` (
   `deleted_at` timestamp
 );
 
-CREATE TABLE `user_car_selling_post` (
+CREATE TABLE `member_car_selling_post` (
   `id` BINARY(16) PRIMARY KEY,
   `used_car_id` BINARY(16),
-  `user_id` BINARY(16),
+  `member_id` BINARY(16),
   `chat` int,
   `focus` int,
   `look` int,
@@ -162,41 +166,41 @@ CREATE TABLE `post` (
     `introduce` VARCHAR(1000),
     `deal_address` VARCHAR(100),
     `used_car_id` BINARY(16),
-    `user_id` BINARY(16)
+    `member_id` BINARY(16)
 );
 
 CREATE TABLE `bookmark` (
     `id` BINARY(16) PRIMARY KEY,
     `post_id` BINARY(16),
-    `user_id` BINARY(16),
+    `member_id` BINARY(16),
     `created_at` timestamp,
     `updated_at` timestamp,
     `deleted_at` timestamp
 );
 
-ALTER TABLE `praise` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `praise` ADD FOREIGN KEY (`member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `praise` ADD FOREIGN KEY (`praiser_id`) REFERENCES `user` (`id`);
+ALTER TABLE `praise` ADD FOREIGN KEY (`praiser_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `review` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `review` ADD FOREIGN KEY (`member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `review` ADD FOREIGN KEY (`reviewer_id`) REFERENCES `user` (`id`);
+ALTER TABLE `review` ADD FOREIGN KEY (`reviewer_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `badge` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `badge` ADD FOREIGN KEY (`member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `bookmark_used_car_post` ADD FOREIGN KEY (`post_id`) REFERENCES `user_car_selling_post` (`id`);
+ALTER TABLE `bookmark_used_car_post` ADD FOREIGN KEY (`post_id`) REFERENCES `member_car_selling_post` (`id`);
 
-ALTER TABLE `bookmark_used_car_post` ADD FOREIGN KEY (`followed_user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `bookmark_used_car_post` ADD FOREIGN KEY (`followed_member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`id`) REFERENCES `matching` (`post_id`);
+ALTER TABLE `member_car_selling_post` ADD FOREIGN KEY (`id`) REFERENCES `matching` (`post_id`);
 
-ALTER TABLE `matching` ADD FOREIGN KEY (`post_user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `matching` ADD FOREIGN KEY (`post_member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `matching` ADD FOREIGN KEY (`match_request_user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `matching` ADD FOREIGN KEY (`match_request_member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `member_car_selling_post` ADD FOREIGN KEY (`member_id`) REFERENCES `member` (`id`);
 
-ALTER TABLE `user_car_selling_post` ADD FOREIGN KEY (`used_car_id`) REFERENCES `used_car` (`id`);
+ALTER TABLE `member_car_selling_post` ADD FOREIGN KEY (`used_car_id`) REFERENCES `used_car` (`id`);
 
 ALTER TABLE `used_car` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
