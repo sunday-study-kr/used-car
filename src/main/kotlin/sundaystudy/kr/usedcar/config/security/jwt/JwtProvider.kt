@@ -1,6 +1,8 @@
 package sundaystudy.kr.usedcar.config.security.jwt
 
-import io.jsonwebtoken.*
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
 import sundaystudy.kr.usedcar.config.security.oauth.user.UserPrinciple
 import sundaystudy.kr.usedcar.module.member.repository.MemberRepository
@@ -16,15 +18,14 @@ class JwtProvider(
     private val REFRESH_TOKEN_EXPIRE_LENGTH = 60L * 60 * 24 * 14 * 1000 // 14 Days
 
     fun createToken(userDetails: UserPrinciple): JwtToken {
-        val claims = getClaims(userDetails)
         val accessToken = getToken(
             userDetails,
-            claims,
+            getAccessClaims(userDetails),
             ACCESS_TOKEN_EXPIRE_LENGTH
         )
         val refreshToken = getToken(
             userDetails,
-            claims,
+            getRefreshClaims(),
             REFRESH_TOKEN_EXPIRE_LENGTH
         )
         saveRefreshToken(refreshToken, userDetails)
@@ -45,10 +46,14 @@ class JwtProvider(
         memberRepository.updateRefreshToken(id, refreshToken)
     }
 
-    private fun getClaims(userDetails: UserPrinciple): Claims {
+    private fun getAccessClaims(userDetails: UserPrinciple): Claims {
         val claims = Jwts.claims()
         claims["id"] = userDetails.getName()
         return claims
+    }
+
+    private fun getRefreshClaims(): Claims {
+        return Jwts.claims()
     }
 
     private fun getToken(loginUser: UserPrinciple, claims: Claims, validationSecond: Long): String {

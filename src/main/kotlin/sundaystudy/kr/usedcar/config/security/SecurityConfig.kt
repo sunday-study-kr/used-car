@@ -3,16 +3,18 @@ package sundaystudy.kr.usedcar.config.security
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService
 import org.springframework.security.oauth2.core.user.OAuth2User
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import sundaystudy.kr.usedcar.config.security.jwt.JwtAuthenticationFilter
 
 @Configuration
@@ -63,5 +65,19 @@ class SecurityConfig(
                 }
             }
             .build()
+    }
+
+    @Bean
+    fun roleHierarchy(): RoleHierarchy {
+        val roleHierarchy = RoleHierarchyImpl()
+        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER")
+        return roleHierarchy
+    }
+
+    @Bean
+    fun expressionHandler(): DefaultWebSecurityExpressionHandler {
+        val expressionHandler = DefaultWebSecurityExpressionHandler()
+        expressionHandler.setRoleHierarchy(roleHierarchy())
+        return expressionHandler
     }
 }
