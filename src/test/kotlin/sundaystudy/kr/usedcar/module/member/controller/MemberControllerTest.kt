@@ -32,6 +32,7 @@ class MemberControllerTest: RestDocsTest() {
         //when
         val perform = mockMvc.perform(
             get("/members/me")
+                .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
         //then

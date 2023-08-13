@@ -34,6 +34,7 @@ class BadgeControllerTest: RestDocsTest() {
         val perform = mockMvc.perform(
             post("/badges")
                 .content(toRequestBody(RepresentBadgeRequest(UUID.randomUUID())))
+                .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
         //then
@@ -60,6 +61,7 @@ class BadgeControllerTest: RestDocsTest() {
         //when
         val perform = mockMvc.perform(
             get("/badges")
+                .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
         //then
