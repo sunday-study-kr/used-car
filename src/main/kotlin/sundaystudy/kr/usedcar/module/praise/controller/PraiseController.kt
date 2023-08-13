@@ -16,7 +16,7 @@ class PraiseController(
     private val praiseService: PraiseService,
 ) {
     @PostMapping
-    fun savePraise(praiseRequest: PraiseRequest): ResponseEntity<IdResponse> =
+    fun savePraise(@RequestBody praiseRequest: PraiseRequest): ResponseEntity<IdResponse> =
         ResponseEntity.status(HttpStatus.CREATED).body(praiseService.savePraise(praiseRequest))
 
     @GetMapping

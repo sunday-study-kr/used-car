@@ -2,18 +2,18 @@ package sundaystudy.kr.usedcar.module.badge.controller
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import sundaystudy.kr.usedcar.module.badge.dto.request.RepresentBadgeRequest
 import sundaystudy.kr.usedcar.module.badge.dto.response.BadgeResponse
 import sundaystudy.kr.usedcar.module.badge.service.BadgeService
-import java.util.*
 
 @RestController
 @RequestMapping("badges")
 class BadgeController(
     private val badgeService: BadgeService,
 ) {
-    @PostMapping("{id}")
-    fun selectRepresentBadge(@PathVariable id: UUID): ResponseEntity<Any> {
-        badgeService.selectRepresentBadge(id)
+    @PostMapping
+    fun selectRepresentBadge(@RequestBody representBadgeRequest: RepresentBadgeRequest): ResponseEntity<Any> {
+        badgeService.selectRepresentBadge(representBadgeRequest)
         return ResponseEntity.ok().build()
     }
 
