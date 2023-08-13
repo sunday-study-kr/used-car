@@ -26,7 +26,7 @@ class ReviewController(
     fun getReview(@PathVariable id: UUID): ResponseEntity<ReviewResponse> =
         ResponseEntity.ok(reviewService.getReview(id))
 
-    @GetMapping("members/{userId}")
-    fun getReviewsByMemberId(@PathVariable userId: UUID): ResponseEntity<List<ReviewResponse>> =
-        ResponseEntity.ok(reviewService.getAllReviewsByMemberId(userId))
+    @GetMapping("members/{memberId}")
+    fun getReviewsByMemberId(@PathVariable memberId: UUID): ResponseEntity<List<ReviewResponse>> =
+        ResponseEntity.ok(reviewService.getAllReviewsByMemberId(memberId))
 }

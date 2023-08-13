@@ -23,9 +23,9 @@ class PraiseController(
     fun getAllPraises(): ResponseEntity<List<PraiseResponse>> =
         ResponseEntity.ok(praiseService.getAllPraises())
 
-    @GetMapping("members/{userId}")
-    fun getPraiseByMemberId(@PathVariable userId: UUID): ResponseEntity<PraiseResponse> =
-        ResponseEntity.ok(praiseService.getPraiseByMemberId(userId))
+    @GetMapping("members/{memberId}")
+    fun getPraiseByMemberId(@PathVariable memberId: UUID): ResponseEntity<PraiseResponse> =
+        ResponseEntity.ok(praiseService.getPraiseByMemberId(memberId))
 
     @GetMapping("{id}")
     fun getPraiseDetails(@PathVariable id: UUID): ResponseEntity<PraiseDetailsResponse> =

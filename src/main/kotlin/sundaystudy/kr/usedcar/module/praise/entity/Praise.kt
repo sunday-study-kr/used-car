@@ -5,7 +5,7 @@ import org.hibernate.annotations.Where
 import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
-import sundaystudy.kr.usedcar.module.user.entity.User
+import sundaystudy.kr.usedcar.module.member.entity.Member
 import java.util.*
 
 @Entity
@@ -21,11 +21,11 @@ class Praise(
 
     @JoinColumn
     @OneToOne(fetch = FetchType.LAZY)
-    val user: User,
+    val member: Member,
 
     @JoinColumn
     @OneToOne(fetch = FetchType.LAZY)
-    val praiser: User,
+    val praiser: Member,
 ) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")

@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /api
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,3 +20,9 @@ spring:
     password: ${MYSQL_ROOT_PASSWORD}
     url: jdbc:mysql://localhost:3306/usedcar?serverTimezone=Asia/Seoul
     user: root
+
+  config:
+    import: classpath:application-env.yml
+
+  main:
+    allow-bean-definition-overriding: true

@@ -4,6 +4,6 @@ import java.util.*
 
 data class PraiseRequest(
     var praiserId: UUID,
-    var userId: UUID,
+    var memberId: UUID,
     var praiseType: String,
 )

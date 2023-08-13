@@ -5,5 +5,5 @@ import java.util.*
 data class ReviewResponse(
     var id: UUID,
     var content: String,
-    var userId: UUID,
+    var memberId: UUID,
 )

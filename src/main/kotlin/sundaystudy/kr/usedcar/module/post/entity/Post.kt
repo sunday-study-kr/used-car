@@ -1,8 +1,8 @@
 package sundaystudy.kr.usedcar.module.post.entity
 
 import jakarta.persistence.*
+import sundaystudy.kr.usedcar.module.member.entity.Member
 import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
-import sundaystudy.kr.usedcar.module.user.entity.User
 import java.util.*
 
 @Entity
@@ -30,6 +30,6 @@ class Post(
     var usedCar: UsedCar? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    var user : User? = null
+    @JoinColumn(name = "member_id")
+    var member : Member? = null
 }

@@ -23,7 +23,7 @@ class ReviewService(
         TODO("Not yet implemented")
     }
 
-    fun getAllReviewsByMemberId(userId: UUID): List<ReviewResponse> {
+    fun getAllReviewsByMemberId(memberId: UUID): List<ReviewResponse> {
         TODO("Not yet implemented")
     }
 }

@@ -3,8 +3,8 @@ package sundaystudy.kr.usedcar.module.matching.entity
 import jakarta.persistence.*
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
+import sundaystudy.kr.usedcar.module.member.entity.Member
 import sundaystudy.kr.usedcar.module.post.entity.Post
-import sundaystudy.kr.usedcar.module.user.entity.User
 
 @Entity
 class Matching(
@@ -17,12 +17,12 @@ class Matching(
     var post: Post? = null
 
     @ManyToOne
-    @JoinColumn(name = "match_request_user_id")
-    var requestUser: User? = null
+    @JoinColumn(name = "match_request_member_id")
+    var requestMember: Member? = null
 
     @ManyToOne
-    @JoinColumn(name = "post_user_id")
-    var postOwner: User? = null
+    @JoinColumn(name = "post_member_id")
+    var postOwner: Member? = null
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
