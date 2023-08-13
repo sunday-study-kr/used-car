@@ -1,0 +1,9 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+== Member
+=== 개인정보 조회
+operation::get member details[snippets='http-request,http-response']

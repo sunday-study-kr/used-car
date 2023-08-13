@@ -6,10 +6,9 @@ import org.mockito.Mockito.`when`
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
-import org.springframework.restdocs.operation.preprocess.Preprocessors
-import org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
+import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -44,9 +43,9 @@ class PraiseControllerTest: RestDocsTest() {
         //docs
         perform.andDo(print())
             .andDo(
-                MockMvcRestDocumentation.document(
+                document(
                     "post praise",
-                    Preprocessors.preprocessRequest(prettyPrint()),
-                    Preprocessors.preprocessResponse(prettyPrint())))
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())))
     }
 }

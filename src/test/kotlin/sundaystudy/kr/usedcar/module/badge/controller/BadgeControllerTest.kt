@@ -7,7 +7,7 @@ import org.mockito.Mockito.`when`
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
@@ -42,7 +42,7 @@ class BadgeControllerTest: RestDocsTest() {
         //docs
         perform.andDo(print())
             .andDo(
-                MockMvcRestDocumentation.document(
+                document(
                     "post select represent badge",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint())))
@@ -68,7 +68,7 @@ class BadgeControllerTest: RestDocsTest() {
         //docs
         perform.andDo(print())
             .andDo(
-                MockMvcRestDocumentation.document(
+                document(
                     "get all badges",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint())))
