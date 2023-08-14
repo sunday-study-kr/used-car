@@ -29,22 +29,22 @@ class Insurance(
     val id: UUID = UUID.randomUUID()
 
 
-    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST])
+    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var unsubscribed : MutableList<Unsubscribed> = mutableListOf()
 
-    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST])
+    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var ownerAccident: MutableList<OwnerAccident> = mutableListOf()
 
-    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST])
+    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var opponentAccident: MutableList<OpponentAccident> = mutableListOf()
 
-    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST])
+    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var changeOwner : MutableList<ChangeOwner> = mutableListOf()
 
-    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST])
+    @OneToMany(mappedBy = "insurance", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var changeNumber : MutableList<ChangeNumber> = mutableListOf()
 
-    @OneToOne(mappedBy = "insurance" , cascade = [CascadeType.PERSIST])
+    @OneToOne(mappedBy = "insurance")
     var usedCar : UsedCar? = null
 
     fun addUnsubscribed(unsubscribed: Unsubscribed){

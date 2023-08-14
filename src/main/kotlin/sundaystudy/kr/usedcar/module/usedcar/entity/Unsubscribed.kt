@@ -1,6 +1,7 @@
 package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 import java.util.Date
 import java.util.UUID
 
@@ -8,10 +9,10 @@ import java.util.UUID
 @Table(name = "unsubscribed")
 class Unsubscribed(
     @Column(name = "start_at")
-    var startAt: Date,
+    var startAt: LocalDateTime,
 
     @Column(name = "end_at")
-    var endAt: Date,
+    var endAt: LocalDateTime,
 
 ) {
     @JoinColumn(name = "insurance_id", columnDefinition = "BINARY(16)")

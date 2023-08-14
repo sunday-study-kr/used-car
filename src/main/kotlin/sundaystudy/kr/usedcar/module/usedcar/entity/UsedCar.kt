@@ -24,11 +24,11 @@ class UsedCar(
     val id: UUID = UUID.randomUUID()
 
     @JoinColumn(name = "car_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY , cascade = [CascadeType.PERSIST , CascadeType.MERGE])
     var car: Car? = null
 
     @JoinColumn(name = "insurance_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST , CascadeType.MERGE])
     var insurance: Insurance? = null
 
     fun addCar(car : Car){
