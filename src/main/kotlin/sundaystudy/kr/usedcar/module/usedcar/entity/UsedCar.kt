@@ -30,4 +30,14 @@ class UsedCar(
     @JoinColumn(name = "insurance_id")
     @OneToOne(fetch = FetchType.LAZY)
     var insurance: Insurance? = null
+
+    fun addCar(car : Car){
+        this.car = car
+        car.usedCar = this
+    }
+
+    fun addInsurance(insurance: Insurance){
+        this.insurance = insurance
+        insurance.usedCar = this
+    }
 }

@@ -9,9 +9,9 @@ data class InsuranceResponse(
     val isRent: Boolean,
     val isSales: Boolean,
     val isPublic: Boolean,
-    var changeNumber: List<ChangeNumberDetail>,
-    var changeOwner: List<ChangeOwnerDetail>,
-    var opponentAccident: List<OpponentAccidentDetail>,
-    var ownerAccident: List<OwnerAccidentDetail>,
-    var unsubscribed: List<UnsubscribedDetail>
+    var changeNumber: MutableList<ChangeNumberDetail>,
+    var changeOwner: MutableList<ChangeOwnerDetail>,
+    var opponentAccident: MutableList<OpponentAccidentDetail>,
+    var ownerAccident: MutableList<OwnerAccidentDetail>,
+    var unsubscribed: MutableList<UnsubscribedDetail>
 )
