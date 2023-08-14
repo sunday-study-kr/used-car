@@ -11,38 +11,42 @@ import sundaystudy.kr.usedcar.module.usedcar.dto.request.UsedCarSaveRequest
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.CarResponse
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.InsuranceResponse
 import sundaystudy.kr.usedcar.module.usedcar.entity.*
+import sundaystudy.kr.usedcar.module.usedcar.mapper.UsedCarMapper
 import sundaystudy.kr.usedcar.module.usedcar.repository.UsedCarRepository
 import java.util.UUID
 
 @Service
 class UsedCarService(
-    private val usedCarRepository: UsedCarRepository
+    private val usedCarRepository: UsedCarRepository,
+    private val usedCarMapper: UsedCarMapper
 ) {
     @Transactional
     fun saveUsedCar(usedCarSaveRequest: UsedCarSaveRequest) : IdResponse {
         var usedCar = UsedCar(usedCarSaveRequest.licenseNumber,usedCarSaveRequest.price,usedCarSaveRequest.savePrice)
+        var car : Car  = usedCarMapper.toCar(usedCarSaveRequest.carSaveRequest)
 
-        var car : Car  = usedCarSaveRequest.carSaveRequest.toCar()
-        var insurance : Insurance = usedCarSaveRequest.insurance.toInsurance()
+        var tmpInsurance = usedCarSaveRequest.insurance
 
-        for(request in usedCarSaveRequest.insurance.changeNumber){
-            insurance.addChangeNumber(request.toChangeNumber())
+        var insurance : Insurance = usedCarMapper.toInsurance(tmpInsurance)
+
+        for(request in tmpInsurance.changeNumber){
+            insurance.addChangeNumber(usedCarMapper.toChangeNumber(request))
         }
 
-        for(request in usedCarSaveRequest.insurance.changeOwner){
-            insurance.addChangeOwner(request.toChangeOwner())
+        for(request in tmpInsurance.changeOwner){
+            insurance.addChangeOwner(usedCarMapper.toChangeOwner(request))
         }
 
-        for(request in usedCarSaveRequest.insurance.ownerAccident){
-            insurance.addOwnerAccident(request.toOwnerAccident())
+        for(request in tmpInsurance.ownerAccident){
+            insurance.addOwnerAccident(usedCarMapper.toOwnerAccident(request))
         }
 
-        for(request in usedCarSaveRequest.insurance.opponentAccident){
-            insurance.addOpponentAccident(request.toOpponentAccident())
+        for(request in tmpInsurance.opponentAccident){
+            insurance.addOpponentAccident(usedCarMapper.toOpponentAccident(request))
         }
 
-        for(request in usedCarSaveRequest.insurance.unsubscribed){
-            insurance.addUnsubscribed(request.toUnsubscribed())
+        for(request in tmpInsurance.unsubscribed){
+            insurance.addUnsubscribed(usedCarMapper.toUnsubscribed(request))
         }
 
         usedCar.addCar(car)
@@ -62,9 +66,9 @@ class UsedCarService(
 
         val curUsedCar = usedCar.get()
 
-        var insuranceResponse : InsuranceResponse = toInsuranceResponse(curUsedCar.insurance!!)
+        var insuranceResponse : InsuranceResponse = usedCarMapper.toInsuranceResponse(curUsedCar.insurance!!)
 
-        var usedCarResponse : UsedCarResponse = UsedCarResponse(curUsedCar.licenseNumber,curUsedCar.price,curUsedCar.savePrice,curUsedCar.car!!.toDto(),insuranceResponse)
+        var usedCarResponse : UsedCarResponse = UsedCarResponse(curUsedCar.licenseNumber,curUsedCar.price,curUsedCar.savePrice,usedCarMapper.toCarResponse(curUsedCar.car!!),insuranceResponse)
 
         return usedCarResponse
     }
@@ -83,44 +87,5 @@ class UsedCarService(
     fun deleteUsedCar(id : UUID)
     {
         TODO("NOT YET")
-    }
-
-    fun CarSaveRequest.toCar() = Car(carType, company, modelName, grade, gradeDetail, year, distance, displacement, fuelType)
-    fun InsuranceRequest.toInsurance() = Insurance(isLoss, isSteal, isWater, isRent, isSales, isPublic)
-    fun ChangeNumberDetail.toChangeNumber() = ChangeNumber(changeDay, changeName, isFirst)
-    fun ChangeOwnerDetail.toChangeOwner() = ChangeOwner(changeDay)
-    fun OpponentAccidentDetail.toOpponentAccident() = OpponentAccident(Day, partPrice, wagesPrice, coationPrice, totalPrice)
-    fun OwnerAccidentDetail.toOwnerAccident() = OwnerAccident(Day, partPrice, wagesPrice, coationPrice, totalPrice)
-    fun UnsubscribedDetail.toUnsubscribed() = Unsubscribed(startAt, endAt)
-
-    fun Car.toDto() = CarResponse(carType, company, modelName, grade, gradeDetail, year, distance, displacement, fuelType)
-    fun ChangeNumber.toDto() = ChangeNumberDetail(changeDay, changeName, isFirst)
-    fun ChangeOwner.toDto() = ChangeOwnerDetail(changeDay)
-    fun OpponentAccident.toDto() = OpponentAccidentDetail(Day, partPrice, wagesPrice, coationPrice, totalPrice)
-    fun OwnerAccident.toDto() = OwnerAccidentDetail(Day, partPrice, wagesPrice, coationPrice, totalPrice)
-    fun Unsubscribed.toDto() = UnsubscribedDetail(startAt, endAt)
-
-    fun toInsuranceResponse(insurance : Insurance) : InsuranceResponse{
-        var response : InsuranceResponse = InsuranceResponse(insurance.isLoss,insurance.isSteal,insurance.isWater,insurance.isRent,insurance.isSales,insurance.isPublic,
-            mutableListOf(),mutableListOf(),mutableListOf(),mutableListOf(),mutableListOf()
-        )
-
-        for(cur in insurance.changeNumber){
-            response.changeNumber.add(cur.toDto())
-        }
-        for(cur in insurance.changeOwner){
-            response.changeOwner.add(cur.toDto())
-        }
-        for(cur in insurance.ownerAccident){
-            response.ownerAccident.add(cur.toDto())
-        }
-        for(cur in insurance.unsubscribed){
-            response.unsubscribed.add(cur.toDto())
-        }
-        for(cur in insurance.opponentAccident){
-            response.opponentAccident.add(cur.toDto())
-        }
-
-        return response
     }
 }
