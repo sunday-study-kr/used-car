@@ -28,5 +28,5 @@ class BadgeService(
 
 
     private fun getEntity(id: UUID): Badge =
-        badgeRepository.findByIdOrNull(id)?: throw EntityNotFoundException()
+        badgeRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }

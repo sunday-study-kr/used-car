@@ -27,5 +27,5 @@ class MemberService(
     }
 
     fun getEntity(id: UUID) =
-        memberRepository.findByIdOrNull(id)?: throw EntityNotFoundException()
+        memberRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }

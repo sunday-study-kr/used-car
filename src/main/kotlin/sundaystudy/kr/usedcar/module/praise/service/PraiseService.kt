@@ -42,5 +42,5 @@ class PraiseService(
         praiseMapper.toDetailsResponse(getEntity(id))
 
     private fun getEntity(id: UUID): Praise =
-        praiseRepository.findByIdOrNull(id)?: throw EntityNotFoundException()
+        praiseRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }

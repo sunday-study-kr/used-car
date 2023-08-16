@@ -13,7 +13,9 @@ class MemberMapper {
         Member(
             oAuth2Details = OAuth2Details(
                 clientId = oAuth2Request.clientId,
-                authProvider =  oAuth2Request.authProvider))
+                authProvider = oAuth2Request.authProvider
+            )
+        )
 
     fun toDetailsResponse(member: Member): MemberDetailsResponse =
         MemberDetailsResponse(

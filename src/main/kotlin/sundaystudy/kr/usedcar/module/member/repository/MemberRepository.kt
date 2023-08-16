@@ -13,6 +13,7 @@ interface MemberRepository : JpaRepository<Member, UUID> {
     @Query("UPDATE Member m SET m.refreshToken = :refreshToken WHERE m.id = :id")
     fun updateRefreshToken(id: UUID, refreshToken: String)
     fun findByoAuth2DetailsClientId(clientId: String): Member?
+
     @Query("SELECT m.refreshToken FROM Member m WHERE m.id = :id")
     fun findRefreshTokenById(id: UUID): String
 }

@@ -37,5 +37,5 @@ class ReviewService(
         reviewMapper.toResponseList(reviewRepository.findAllByMemberId(memberId))
 
     private fun getEntity(id: UUID) =
-        reviewRepository.findByIdOrNull(id)?: throw EntityNotFoundException()
+        reviewRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }
