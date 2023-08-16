@@ -1,0 +1,9 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+== Praise
+=== 칭찬 생성
+operation::post praise[snippets='http-request,http-response']

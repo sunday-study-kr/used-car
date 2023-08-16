@@ -1,0 +1,12 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+== Badge
+=== 대표 뱃지 등록
+operation::post select represent badge[snippets='http-request,http-response']
+
+=== 전체 뱃지 조회
+operation::get all badges[snippets='http-request,http-response']
