@@ -15,7 +15,7 @@ class OAuth2AuthenticationSuccessHandler(
     private val jwtCookieProvider: JwtCookieProvider,
 ): SimpleUrlAuthenticationSuccessHandler() {
     @Value("\${app.auth.authorizedRedirectUri}")
-    lateinit var REDIRECT_URI: String
+    private lateinit var REDIRECT_URI: String
 
     override fun onAuthenticationSuccess(
         request: HttpServletRequest?, response: HttpServletResponse, authentication: Authentication

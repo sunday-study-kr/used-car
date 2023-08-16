@@ -33,7 +33,7 @@ class PraiseControllerTest: RestDocsTest() {
         //when
         val perform = mockMvc.perform(
             post("/praises")
-                .content(toRequestBody(PraiseRequest(UUID.randomUUID(), UUID.randomUUID(), "친절해요")))
+                .content(toRequestBody(PraiseRequest("칭찬합니다~~", UUID.randomUUID(), "친절해요")))
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 

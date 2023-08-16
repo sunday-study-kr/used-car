@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.praise.controller
 
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,11 +21,11 @@ class PraiseController(
         ResponseEntity.status(HttpStatus.CREATED).body(praiseService.savePraise(praiseRequest))
 
     @GetMapping
-    fun getAllPraises(): ResponseEntity<List<PraiseResponse>> =
-        ResponseEntity.ok(praiseService.getAllPraises())
+    fun getAllPraises(pageable: Pageable): ResponseEntity<List<PraiseResponse>> =
+        ResponseEntity.ok(praiseService.getAllPraises(pageable))
 
     @GetMapping("members/{memberId}")
-    fun getPraiseByMemberId(@PathVariable memberId: UUID): ResponseEntity<PraiseResponse> =
+    fun getPraiseByMemberId(@PathVariable memberId: UUID): ResponseEntity<List<PraiseResponse>> =
         ResponseEntity.ok(praiseService.getPraiseByMemberId(memberId))
 
     @GetMapping("{id}")

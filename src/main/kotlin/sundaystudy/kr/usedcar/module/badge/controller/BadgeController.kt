@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.badge.controller
 
+import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.module.badge.dto.request.RepresentBadgeRequest
@@ -18,6 +19,6 @@ class BadgeController(
     }
 
     @GetMapping
-    fun getAllBadges(): ResponseEntity<List<BadgeResponse>> =
-        ResponseEntity.ok(badgeService.getAllBadges())
+    fun getAllBadges(pageable: Pageable): ResponseEntity<List<BadgeResponse>> =
+        ResponseEntity.ok(badgeService.getAllBadges(pageable))
 }

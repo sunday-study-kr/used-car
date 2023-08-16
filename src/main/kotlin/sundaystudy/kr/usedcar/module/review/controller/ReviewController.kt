@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.review.controller
 
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -19,8 +20,8 @@ class ReviewController(
         ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(reviewRequest))
 
     @GetMapping
-    fun getAllReview(): ResponseEntity<List<ReviewResponse>> =
-        ResponseEntity.ok(reviewService.getAllReviews())
+    fun getAllReview(pageable: Pageable): ResponseEntity<List<ReviewResponse>> =
+        ResponseEntity.ok(reviewService.getAllReviews(pageable))
 
     @GetMapping("{id}")
     fun getReview(@PathVariable id: UUID): ResponseEntity<ReviewResponse> =
