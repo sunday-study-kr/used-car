@@ -4,13 +4,10 @@ import UsedCarResponse
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import sundaystudy.kr.usedcar.global.dto.IdResponse
-import sundaystudy.kr.usedcar.module.usedcar.dto.detail.*
-import sundaystudy.kr.usedcar.module.usedcar.dto.request.CarSaveRequest
-import sundaystudy.kr.usedcar.module.usedcar.dto.request.InsuranceRequest
 import sundaystudy.kr.usedcar.module.usedcar.dto.request.UsedCarSaveRequest
-import sundaystudy.kr.usedcar.module.usedcar.dto.response.CarResponse
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.InsuranceResponse
 import sundaystudy.kr.usedcar.module.usedcar.entity.*
+import sundaystudy.kr.usedcar.module.usedcar.exception.UsedCarNotFoundException
 import sundaystudy.kr.usedcar.module.usedcar.mapper.UsedCarMapper
 import sundaystudy.kr.usedcar.module.usedcar.repository.UsedCarRepository
 import java.util.UUID
@@ -62,7 +59,7 @@ class UsedCarService(
         val usedCar = usedCarRepository.findById(id)
 
         if(usedCar.isEmpty)
-            throw RuntimeException()
+            throw UsedCarNotFoundException()
 
         val curUsedCar = usedCar.get()
 
