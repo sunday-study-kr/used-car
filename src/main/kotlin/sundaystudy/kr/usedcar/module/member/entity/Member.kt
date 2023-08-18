@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
+import sundaystudy.kr.usedcar.module.badge.entity.Badge
 import java.util.*
 
 @Entity
@@ -39,6 +40,10 @@ class Member(
     var role: Role = Role.ROLE_USER
         protected set
 
+    @OneToMany(mappedBy = "member")
+    var badges: MutableList<Badge> = mutableListOf()
+        protected set
+
     @Embedded
     override var baseTime: BaseTime = BaseTime()
 
@@ -47,6 +52,10 @@ class Member(
 
     fun updateRefreshToken(refreshToken: String) {
         this.refreshToken = refreshToken
+    }
+
+    fun organizeBadge(badge: Badge) {
+        this.badges.add(badge)
     }
 
     // TODO Double 필드 3개에 대한 업데이트 로직 함수 작성

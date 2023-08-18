@@ -6,6 +6,7 @@ import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.`when`
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
@@ -56,7 +57,7 @@ class BadgeControllerTest: RestDocsTest() {
         val expected = listOf(
             BadgeResponse(UUID.randomUUID(), UUID.randomUUID(), "거래왕", true),
             BadgeResponse(UUID.randomUUID(), UUID.randomUUID(), "친절왕", true))
-        `when`(badgeService.getAllBadges()).thenReturn(expected)
+        `when`(badgeService.getAllBadges(any(Pageable::class.java))).thenReturn(expected)
 
         //when
         val perform = mockMvc.perform(

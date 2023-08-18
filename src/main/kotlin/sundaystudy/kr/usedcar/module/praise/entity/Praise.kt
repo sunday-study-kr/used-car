@@ -20,11 +20,11 @@ class Praise(
     val content: String,
 
     @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     val member: Member,
 
     @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     val praiser: Member,
 ) : Auditable {
     @Id

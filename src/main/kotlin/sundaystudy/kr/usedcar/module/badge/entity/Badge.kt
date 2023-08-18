@@ -15,17 +15,35 @@ class Badge(
     val badgeName: String,
 
     @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     var member: Member,
 ) : Auditable {
+
+    init {
+        organizeMember(this.member)
+    }
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    var isRepresent: Boolean? = null
+    var isRepresent: Boolean = false
         protected set
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
+
+    fun updateToRepresent() {
+        this.member.badges.find(Badge::isRepresent)?.updateToNotRepresent()
+        this.isRepresent = true
+    }
+
+    private fun updateToNotRepresent() {
+        this.isRepresent = false
+    }
+
+    private fun organizeMember(member: Member) {
+        this.member = member
+        member.organizeBadge(this)
+    }
 }
