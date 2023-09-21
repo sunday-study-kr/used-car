@@ -9,5 +9,7 @@
 Sunday Study
 
 include::member.adoc[]
+include::auth.adoc[]
 include::badge.adoc[]
 include::praise.adoc[]
+include::review.adoc[]

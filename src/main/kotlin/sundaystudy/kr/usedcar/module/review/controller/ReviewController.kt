@@ -17,7 +17,7 @@ class ReviewController(
     private val reviewService: ReviewService,
 ) {
     @PostMapping
-    fun saveReview(reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
+    fun saveReview(@RequestBody reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
         ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(reviewRequest))
 
     @GetMapping
@@ -33,7 +33,7 @@ class ReviewController(
         ResponseEntity.ok(reviewService.getAllReviewsByMemberId(memberId))
 
     @PutMapping
-    fun updateReview(reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Any> {
+    fun updateReview(@RequestBody reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Any> {
         reviewService.updateReview(reviewUpdateRequest)
         return ResponseEntity.noContent().build()
     }

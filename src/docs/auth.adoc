@@ -4,6 +4,6 @@
 :toc: left
 :toclevels: 4
 
-== Badge
-=== 대표 뱃지 등록
+== Auth
+=== 토큰 갱신
 operation::get new refresh token[snippets='http-request,http-response']
