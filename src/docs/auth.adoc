@@ -1,0 +1,9 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+== Badge
+=== 대표 뱃지 등록
+operation::get new refresh token[snippets='http-request,http-response']

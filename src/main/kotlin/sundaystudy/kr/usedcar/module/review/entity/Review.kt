@@ -31,4 +31,8 @@ class Review(
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
+
+    fun update(content: String) {
+        this.content = content
+    }
 }

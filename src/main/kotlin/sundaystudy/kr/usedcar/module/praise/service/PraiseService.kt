@@ -3,11 +3,13 @@ package sundaystudy.kr.usedcar.module.praise.service
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.global.exception.EntityNotFoundException
 import sundaystudy.kr.usedcar.module.member.service.AuthService
 import sundaystudy.kr.usedcar.module.member.service.MemberService
 import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseRequest
+import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseUpdateRequest
 import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseDetailsResponse
 import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseResponse
 import sundaystudy.kr.usedcar.module.praise.entity.Praise
@@ -40,6 +42,15 @@ class PraiseService(
 
     fun getPraiseDetails(id: UUID): PraiseDetailsResponse =
         praiseMapper.toDetailsResponse(getEntity(id))
+
+    @Transactional
+    fun updatePraise(praiseUpdateRequest: PraiseUpdateRequest) {
+        val praise = getEntity(praiseUpdateRequest.id)
+        praise.update(praiseUpdateRequest.content, praiseUpdateRequest.praiseType)
+    }
+    @Transactional
+    fun deletePraise(id: UUID) =
+        getEntity(id).delete()
 
     private fun getEntity(id: UUID): Praise =
         praiseRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
