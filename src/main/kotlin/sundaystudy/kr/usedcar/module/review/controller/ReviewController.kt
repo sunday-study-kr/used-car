@@ -35,12 +35,12 @@ class ReviewController(
     @PutMapping
     fun updateReview(reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Any> {
         reviewService.updateReview(reviewUpdateRequest)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("{id}")
     fun deleteReview(@PathVariable id: UUID): ResponseEntity<Any> {
         reviewService.deleteReview(id)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.noContent().build()
     }
 }
