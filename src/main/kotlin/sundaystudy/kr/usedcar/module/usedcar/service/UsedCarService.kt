@@ -4,6 +4,7 @@ import UsedCarResponse
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import sundaystudy.kr.usedcar.global.dto.IdResponse
+import sundaystudy.kr.usedcar.module.usedcar.dto.request.UpdateUsedCarRequest
 import sundaystudy.kr.usedcar.module.usedcar.dto.request.UsedCarSaveRequest
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.InsuranceResponse
 import sundaystudy.kr.usedcar.module.usedcar.entity.*
@@ -70,19 +71,30 @@ class UsedCarService(
         return usedCarResponse
     }
 
-    fun updateUsedCarInfo()
-    {
-        TODO("NOT YET")
-    }
-
     fun updateUsedCarInsurance()
     {
         TODO("NOT YET")
     }
 
+    @Transactional
+    fun updateUsedCarInfo(request : UpdateUsedCarRequest)
+    {
+        val usedCar = usedCarRepository.findById(request.id)
+
+        if(usedCar.isEmpty)
+            throw UsedCarNotFoundException()
+
+        val curUsedCar = usedCar.get()
+
+        curUsedCar.price = request.price
+        curUsedCar.savePrice = request.savePrice
+
+        usedCarRepository.save(curUsedCar)
+    }
+
 
     fun deleteUsedCar(id : UUID)
     {
-        TODO("NOT YET")
+        usedCarRepository.deleteById(id)
     }
 }

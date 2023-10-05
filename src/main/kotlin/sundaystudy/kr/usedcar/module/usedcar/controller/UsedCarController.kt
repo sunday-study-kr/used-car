@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.global.dto.IdResponse
+import sundaystudy.kr.usedcar.module.usedcar.dto.request.UpdateUsedCarRequest
 import sundaystudy.kr.usedcar.module.usedcar.dto.request.UsedCarSaveRequest
 import sundaystudy.kr.usedcar.module.usedcar.service.UsedCarService
 import java.util.UUID
@@ -24,6 +25,12 @@ class UsedCarController(
     fun getUsedCarById(@PathVariable id : UUID) : ResponseEntity<UsedCarResponse>
     {
         return ResponseEntity.status(HttpStatus.OK).body(usedCarService.getUsedCar(id))
+    }
+
+    @PutMapping("/update/car")
+    fun updateUsedCarInfo(@RequestBody request : UpdateUsedCarRequest) : ResponseEntity<Unit>
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(usedCarService.updateUsedCarInfo(request))
     }
 
     @DeleteMapping("/{id}")
