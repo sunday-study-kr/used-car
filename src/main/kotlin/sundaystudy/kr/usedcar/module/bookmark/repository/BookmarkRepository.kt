@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import sundaystudy.kr.usedcar.module.bookmark.entity.Bookmark
 import java.util.UUID
 
-interface BookmarkRepository : JpaRepository<Bookmark, UUID>
+interface BookmarkRepository : JpaRepository<Bookmark, UUID> {
+    fun findAllByMemberId(memberId: UUID): List<Bookmark>
+}
