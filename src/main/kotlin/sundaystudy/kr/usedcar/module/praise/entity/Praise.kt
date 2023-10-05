@@ -14,18 +14,18 @@ import java.util.*
 class Praise(
 
     @Column(nullable = false)
-    val praiseType: String,
+    var praiseType: String,
 
     @Lob
-    val content: String,
+    var content: String,
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    val member: Member,
+    var member: Member,
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    val praiser: Member,
+    var praiser: Member,
 ) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")
@@ -40,4 +40,9 @@ class Praise(
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
+
+    fun update(content: String, praiseType: String) {
+        this.content = content
+        this.praiseType = praiseType
+    }
 }

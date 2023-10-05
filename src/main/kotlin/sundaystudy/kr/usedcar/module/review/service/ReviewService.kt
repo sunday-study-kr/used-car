@@ -3,11 +3,13 @@ package sundaystudy.kr.usedcar.module.review.service
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.global.exception.EntityNotFoundException
 import sundaystudy.kr.usedcar.module.member.service.AuthService
 import sundaystudy.kr.usedcar.module.member.service.MemberService
 import sundaystudy.kr.usedcar.module.review.dto.request.ReviewRequest
+import sundaystudy.kr.usedcar.module.review.dto.request.ReviewUpdateRequest
 import sundaystudy.kr.usedcar.module.review.dto.response.ReviewResponse
 import sundaystudy.kr.usedcar.module.review.mapper.ReviewMapper
 import sundaystudy.kr.usedcar.module.review.repository.ReviewRepository
@@ -35,6 +37,16 @@ class ReviewService(
 
     fun getAllReviewsByMemberId(memberId: UUID): List<ReviewResponse> =
         reviewMapper.toResponseList(reviewRepository.findAllByMemberId(memberId))
+
+    @Transactional
+    fun updateReview(reviewUpdateRequest: ReviewUpdateRequest) {
+        val review = getEntity(reviewUpdateRequest.id)
+        review.update(reviewUpdateRequest.content)
+    }
+
+    @Transactional
+    fun deleteReview(id: UUID) =
+        getEntity(id).delete()
 
     private fun getEntity(id: UUID) =
         reviewRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()

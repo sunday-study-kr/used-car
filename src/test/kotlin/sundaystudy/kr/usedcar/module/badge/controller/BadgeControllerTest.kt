@@ -39,7 +39,7 @@ class BadgeControllerTest: RestDocsTest() {
                 .contentType(MediaType.APPLICATION_JSON))
 
         //then
-        perform.andExpect(status().isOk)
+        perform.andExpect(status().isNoContent)
 
         //docs
         perform.andDo(print())

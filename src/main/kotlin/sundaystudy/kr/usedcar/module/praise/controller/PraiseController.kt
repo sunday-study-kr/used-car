@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseRequest
+import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseUpdateRequest
 import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseDetailsResponse
 import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseResponse
 import sundaystudy.kr.usedcar.module.praise.service.PraiseService
@@ -31,4 +32,16 @@ class PraiseController(
     @GetMapping("{id}")
     fun getPraiseDetails(@PathVariable id: UUID): ResponseEntity<PraiseDetailsResponse> =
         ResponseEntity.ok(praiseService.getPraiseDetails(id))
+
+    @PutMapping
+    fun updatePraise(@RequestBody praiseUpdateRequest: PraiseUpdateRequest): ResponseEntity<Any> {
+        praiseService.updatePraise(praiseUpdateRequest)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("{id}")
+    fun deletePraise(@PathVariable id: UUID): ResponseEntity<Any> {
+        praiseService.deletePraise(id)
+        return ResponseEntity.noContent().build()
+    }
 }

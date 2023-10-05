@@ -15,7 +15,7 @@ class BadgeController(
     @PostMapping
     fun selectRepresentBadge(@RequestBody representBadgeRequest: RepresentBadgeRequest): ResponseEntity<Any> {
         badgeService.selectRepresentBadge(representBadgeRequest)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.noContent().build()
     }
 
     @GetMapping

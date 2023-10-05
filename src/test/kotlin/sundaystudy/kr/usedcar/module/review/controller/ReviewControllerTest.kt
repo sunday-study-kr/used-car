@@ -1,4 +1,4 @@
-package sundaystudy.kr.usedcar.module.praise.controller
+package sundaystudy.kr.usedcar.module.review.controller
 
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -6,7 +6,6 @@ import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.`when`
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
@@ -16,30 +15,30 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import sundaystudy.kr.usedcar.global.dto.IdResponse
-import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseRequest
-import sundaystudy.kr.usedcar.module.praise.dto.request.PraiseUpdateRequest
-import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseDetailsResponse
-import sundaystudy.kr.usedcar.module.praise.dto.response.PraiseResponse
-import sundaystudy.kr.usedcar.module.praise.service.PraiseService
+import sundaystudy.kr.usedcar.module.review.dto.request.ReviewRequest
+import sundaystudy.kr.usedcar.module.review.dto.request.ReviewUpdateRequest
+import sundaystudy.kr.usedcar.module.review.dto.response.ReviewResponse
+import sundaystudy.kr.usedcar.module.review.service.ReviewService
 import sundaystudy.kr.usedcar.support.docs.RestDocsTest
 import java.util.*
 
-@DisplayName("Praise 컨트롤러의")
-@WebMvcTest(PraiseController::class)
-class PraiseControllerTest: RestDocsTest() {
-    @MockBean private lateinit var praiseService: PraiseService
+@DisplayName("Review 컨트롤러의")
+@WebMvcTest(ReviewController::class)
+class ReviewControllerTest: RestDocsTest() {
+
+    @MockBean private lateinit var reviewService: ReviewService
 
     @Test
-    @DisplayName("칭찬 저장 api가 수행되는가")
-    fun savePraise() {
+    @DisplayName("리뷰 저장 api가 수행되는가")
+    fun saveReview() {
         //given
         val expected = IdResponse(UUID.randomUUID())
-        `when`(praiseService.savePraise(any(PraiseRequest::class.java))).thenReturn(expected)
+        `when`(reviewService.saveReview(any(ReviewRequest::class.java))).thenReturn(expected)
 
         //when
         val perform = mockMvc.perform(
-            post("/praises")
-                .content(toRequestBody(PraiseRequest("칭찬합니다~~", UUID.randomUUID(), "친절해요")))
+            post("/reviews")
+                .content(toRequestBody(ReviewRequest("매우 좋습니다", UUID.randomUUID())))
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -51,23 +50,23 @@ class PraiseControllerTest: RestDocsTest() {
         perform.andDo(print())
             .andDo(
                 document(
-                    "post praise",
+                    "post review",
                     preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
+                    preprocessResponse(prettyPrint())
+                )
+            )
     }
 
     @Test
-    @DisplayName("모든 칭찬 조회 api가 수행되는가")
-    fun getAllPraises() {
+    @DisplayName("리뷰 전체 조회 api가 수행되는가")
+    fun getAllReview() {
         //given
-        val expected = listOf(PraiseResponse(UUID.randomUUID(), UUID.randomUUID(), "친절해요", 1),
-            PraiseResponse(UUID.randomUUID(), UUID.randomUUID(), "응답이 빨라요", 4))
-        `when`(praiseService.getAllPraises(any(Pageable::class.java))).thenReturn(expected)
+        val expected = listOf(ReviewResponse(UUID.randomUUID(), "매우 좋아요", UUID.randomUUID()))
+        `when`(reviewService.getAllReviews(any(Pageable::class.java))).thenReturn(expected)
 
         //when
         val perform = mockMvc.perform(
-            get("/praises")
-                .content(toRequestBody(PageRequest.of(0, 20)))
+            get("/reviews")
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -79,48 +78,23 @@ class PraiseControllerTest: RestDocsTest() {
         perform.andDo(print())
             .andDo(
                 document(
-                    "get all praises",
+                    "get all reviews",
                     preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
+                    preprocessResponse(prettyPrint())
+                )
+            )
     }
 
     @Test
-    @DisplayName("멤버가 받은 칭찬 조회 api가 수행되는가")
-    fun getPraiseByMemberId() {
+    @DisplayName("리뷰 단건 조회 api가 수행되는가")
+    fun getReview() {
         //given
-        val expected = listOf(PraiseResponse(UUID.randomUUID(), UUID.randomUUID(), "친절해요", 1),
-            PraiseResponse(UUID.randomUUID(), UUID.randomUUID(), "응답이 빨라요", 4))
-        `when`(praiseService.getPraiseByMemberId(any(UUID::class.java))).thenReturn(expected)
+        val expected = ReviewResponse(UUID.randomUUID(), "매우 좋아요", UUID.randomUUID())
+        `when`(reviewService.getReview(any(UUID::class.java))).thenReturn(expected)
 
         //when
         val perform = mockMvc.perform(
-            get("/praises/members/" + UUID.randomUUID())
-                .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
-                .contentType(MediaType.APPLICATION_JSON))
-
-        //then
-        perform.andExpect(status().isOk)
-            .andExpect(jsonPath("$").isArray)
-
-        //docs
-        perform.andDo(print())
-            .andDo(
-                document(
-                    "get praise by member",
-                    preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
-    }
-
-    @Test
-    @DisplayName("칭찬 상세 조회 api가 수행되는가")
-    fun getPraiseDetails() {
-        //given
-        val expected = PraiseDetailsResponse(UUID.randomUUID(), "친절해요", "친절하게 설명해주셨어요")
-        `when`(praiseService.getPraiseDetails(any(UUID::class.java))).thenReturn(expected)
-
-        //when
-        val perform = mockMvc.perform(
-            get("/praises/" + UUID.randomUUID())
+            get("/reviews/" + UUID.randomUUID())
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -128,27 +102,57 @@ class PraiseControllerTest: RestDocsTest() {
         perform.andExpect(status().isOk)
             .andExpect(jsonPath("$.id").isString)
             .andExpect(jsonPath("$.content").isString)
-            .andExpect(jsonPath("$.praise_type").isString)
+            .andExpect(jsonPath("$.member_id").isString)
 
         //docs
         perform.andDo(print())
             .andDo(
                 document(
-                    "get praise details",
+                    "get review",
                     preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
+                    preprocessResponse(prettyPrint())
+                )
+            )
     }
 
     @Test
-    @DisplayName("칭찬 업데이트 api가 수행되는가")
-    fun updatePraise() {
+    @DisplayName("멤버가 작성한 리뷰 조회 api가 수행되는가")
+    fun getReviewsByMemberId() {
         //given
-        doNothing().`when`(praiseService).updatePraise(any(PraiseUpdateRequest::class.java))
+        val expected = listOf(ReviewResponse(UUID.randomUUID(), "매우 좋아요", UUID.randomUUID()))
+        `when`(reviewService.getAllReviewsByMemberId(any(UUID::class.java))).thenReturn(expected)
 
         //when
         val perform = mockMvc.perform(
-            put("/praises")
-                .content(toRequestBody(PraiseUpdateRequest(UUID.randomUUID(), "친절해요", "완전 친절!!")))
+            get("/reviews/members/" + UUID.randomUUID())
+                .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
+                .contentType(MediaType.APPLICATION_JSON))
+
+        //then
+        perform.andExpect(status().isOk)
+            .andExpect(jsonPath("$").isArray)
+
+        //docs
+        perform.andDo(print())
+            .andDo(
+                document(
+                    "get all reviews by member",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())
+                )
+            )
+    }
+
+    @Test
+    @DisplayName("리뷰 업데이트 api가 수행되는가")
+    fun updateReview() {
+        //given
+        doNothing().`when`(reviewService).updateReview(any(ReviewUpdateRequest::class.java))
+
+        //when
+        val perform = mockMvc.perform(
+            put("/reviews")
+                .content(toRequestBody(ReviewUpdateRequest(UUID.randomUUID(), "수정할 내용")))
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -159,20 +163,22 @@ class PraiseControllerTest: RestDocsTest() {
         perform.andDo(print())
             .andDo(
                 document(
-                    "put update praise",
+                    "put update review",
                     preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
+                    preprocessResponse(prettyPrint())
+                )
+            )
     }
 
     @Test
-    @DisplayName("칭찬 삭제 api가 수행되는가")
-    fun deletePraise() {
+    @DisplayName("리뷰 삭제 api가 수행되는가")
+    fun deleteReview() {
         //given
-        doNothing().`when`(praiseService).deletePraise(any(UUID::class.java))
+        doNothing().`when`(reviewService).deleteReview(any(UUID::class.java))
 
         //when
         val perform = mockMvc.perform(
-            delete("/praises/" + UUID.randomUUID())
+            delete("/reviews/" + UUID.randomUUID())
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -183,8 +189,10 @@ class PraiseControllerTest: RestDocsTest() {
         perform.andDo(print())
             .andDo(
                 document(
-                    "delete praise",
+                    "delete review",
                     preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint())))
+                    preprocessResponse(prettyPrint())
+                )
+            )
     }
 }

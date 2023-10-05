@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.review.dto.request.ReviewRequest
+import sundaystudy.kr.usedcar.module.review.dto.request.ReviewUpdateRequest
 import sundaystudy.kr.usedcar.module.review.dto.response.ReviewResponse
 import sundaystudy.kr.usedcar.module.review.service.ReviewService
 import java.util.*
@@ -16,7 +17,7 @@ class ReviewController(
     private val reviewService: ReviewService,
 ) {
     @PostMapping
-    fun saveReview(reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
+    fun saveReview(@RequestBody reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
         ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(reviewRequest))
 
     @GetMapping
@@ -30,4 +31,16 @@ class ReviewController(
     @GetMapping("members/{memberId}")
     fun getReviewsByMemberId(@PathVariable memberId: UUID): ResponseEntity<List<ReviewResponse>> =
         ResponseEntity.ok(reviewService.getAllReviewsByMemberId(memberId))
+
+    @PutMapping
+    fun updateReview(@RequestBody reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Any> {
+        reviewService.updateReview(reviewUpdateRequest)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("{id}")
+    fun deleteReview(@PathVariable id: UUID): ResponseEntity<Any> {
+        reviewService.deleteReview(id)
+        return ResponseEntity.noContent().build()
+    }
 }

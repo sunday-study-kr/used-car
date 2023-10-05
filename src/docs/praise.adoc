@@ -7,3 +7,18 @@
 == Praise
 === 칭찬 생성
 operation::post praise[snippets='http-request,http-response']
+
+=== 칭찬 전체 조회
+operation::get all praises[snippets='http-request,http-response']
+
+=== 멤버가 받은 칭찬 조회
+operation::get praise by member[snippets='http-request,http-response']
+
+=== 칭찬 상세 조회
+operation::get praise details[snippets='http-request,http-response']
+
+=== 칭찬 업데이트
+operation::put update praise[snippets='http-request,http-response']
+
+=== 칭찬 업데이트
+operation::delete praise[snippets='http-request,http-response']
