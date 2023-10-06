@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import sundaystudy.kr.usedcar.module.matching.entity.Matching
 import java.util.UUID
 
-interface MatchingRepository : JpaRepository<Matching, UUID>
+interface MatchingRepository : JpaRepository<Matching, UUID> {
+    fun findAllByRequestMemberId(requestMemberId: UUID): List<Matching>
+}

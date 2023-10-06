@@ -12,6 +12,7 @@ import sundaystudy.kr.usedcar.global.dto.PageableeResponse
 import sundaystudy.kr.usedcar.module.matching.dto.MatchingRequest
 import sundaystudy.kr.usedcar.module.matching.dto.MatchingResponse
 import sundaystudy.kr.usedcar.module.matching.service.MatchingService
+import java.util.UUID
 
 @RestController("matching")
 class MatchingController(
@@ -20,16 +21,18 @@ class MatchingController(
 
     @GetMapping("/")
     fun getMatchingList(pageable: Pageable): ResponseEntity<PageableeResponse<MatchingResponse>> {
-        return ResponseEntity.status(HttpStatus.OK).body(PageableeResponse(listOf(), pageable.pageNumber, pageable.offset, 0))
+        return ResponseEntity.status(HttpStatus.OK).body(PageableeResponse(matchingService.getMatchingList(), pageable.pageNumber, pageable.offset, 0))
     }
 
     @GetMapping("/{id}")
     fun getMatching(@PathVariable("id") matchingId: String): ResponseEntity<MatchingResponse> {
-        return ResponseEntity.status(HttpStatus.OK).body(MatchingResponse(""))
+        return ResponseEntity.status(HttpStatus.OK).body(matchingService.getMatching(UUID.fromString(matchingId)))
     }
 
     @PostMapping("/")
     fun saveMatching(@RequestBody request: MatchingRequest): ResponseEntity<MatchingResponse> {
-        return ResponseEntity.status(HttpStatus.OK).body(MatchingResponse(""))
+        return ResponseEntity.status(HttpStatus.OK).body(matchingService.saveMatching(
+            UUID.fromString(request.postId)
+        ))
     }
 }
