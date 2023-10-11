@@ -2,6 +2,7 @@ package sundaystudy.kr.usedcar.module.usedcar.entity
 
 import jakarta.persistence.*
 import org.hibernate.annotations.Where
+import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 
@@ -9,6 +10,7 @@ import java.util.UUID
 
 @Entity
 @Where(clause = "deleted_at is null")
+@EntityListeners(AuditListener::class)
 @Table(name = "used_car")
 class UsedCar(
 
