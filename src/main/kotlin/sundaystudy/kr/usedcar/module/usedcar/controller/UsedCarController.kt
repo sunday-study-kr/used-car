@@ -27,7 +27,7 @@ class UsedCarController(
         return ResponseEntity.status(HttpStatus.OK).body(usedCarService.getUsedCar(id))
     }
 
-    @PutMapping("/update/car")
+    @PutMapping("/change")
     fun updateUsedCarInfo(@RequestBody request : UpdateUsedCarRequest) : ResponseEntity<Unit>
     {
         return ResponseEntity.status(HttpStatus.OK).body(usedCarService.updateUsedCarInfo(request))
