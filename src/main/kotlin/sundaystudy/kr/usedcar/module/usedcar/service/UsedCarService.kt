@@ -1,11 +1,13 @@
 package sundaystudy.kr.usedcar.module.usedcar.service
 
 import UsedCarResponse
+import jakarta.persistence.EntityNotFoundException
 import jakarta.transaction.Transactional
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import sundaystudy.kr.usedcar.global.dto.IdResponse
-import sundaystudy.kr.usedcar.module.usedcar.dto.request.UpdateUsedCarRequest
-import sundaystudy.kr.usedcar.module.usedcar.dto.request.UsedCarSaveRequest
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.UnsubscribedDetail
+import sundaystudy.kr.usedcar.module.usedcar.dto.request.*
 import sundaystudy.kr.usedcar.module.usedcar.dto.response.InsuranceResponse
 import sundaystudy.kr.usedcar.module.usedcar.entity.*
 import sundaystudy.kr.usedcar.module.usedcar.exception.UsedCarNotFoundException
@@ -57,44 +59,47 @@ class UsedCarService(
 
     fun getUsedCar(id : UUID) : UsedCarResponse
     {
-        val usedCar = usedCarRepository.findById(id)
+        val usedCar = getUsedCarEntity(id)
 
-        if(usedCar.isEmpty)
-            throw UsedCarNotFoundException()
+        var insuranceResponse : InsuranceResponse = usedCarMapper.toInsuranceResponse(usedCar.insurance!!)
 
-        val curUsedCar = usedCar.get()
-
-        var insuranceResponse : InsuranceResponse = usedCarMapper.toInsuranceResponse(curUsedCar.insurance!!)
-
-        var usedCarResponse : UsedCarResponse = UsedCarResponse(curUsedCar.licenseNumber,curUsedCar.price,curUsedCar.savePrice,usedCarMapper.toCarResponse(curUsedCar.car!!),insuranceResponse)
+        var usedCarResponse : UsedCarResponse = UsedCarResponse(usedCar.licenseNumber,usedCar.price,usedCar.savePrice,usedCarMapper.toCarResponse(usedCar.car!!),insuranceResponse)
 
         return usedCarResponse
     }
-
-    fun updateUsedCarInsurance()
+    @Transactional
+    fun updateCarAccident(request: UpdateAccidentRequest)
     {
-        TODO("NOT YET")
+        val usedCar =  getUsedCarEntity(request.id)
+
+        if(request.accidentType == AccidentType.OWNER){
+            usedCar.insurance!!.addOwnerAccident(usedCarMapper.toOwnerAccident(request.accidentDetail))
+        }else{
+            usedCar.insurance!!.addOpponentAccident(usedCarMapper.toOpponentAccident(request.accidentDetail))
+        }
+    }
+
+    @Transactional
+    fun updateUnsubscribed(request : UpdateUnsubscribedRequest){
+        val usedCar = getUsedCarEntity(request.id)
+        usedCar.insurance!!.addUnsubscribed(usedCarMapper.toUnsubscribed(request.detail))
     }
 
     @Transactional
     fun updateUsedCarInfo(request : UpdateUsedCarRequest)
     {
-        val usedCar = usedCarRepository.findById(request.id)
+        val usedCar = getUsedCarEntity(request.id)
 
-        if(usedCar.isEmpty)
-            throw UsedCarNotFoundException()
-
-        val curUsedCar = usedCar.get()
-
-        curUsedCar.price = request.price
-        curUsedCar.savePrice = request.savePrice
-
-        usedCarRepository.save(curUsedCar)
+        usedCar.price = request.price
+        usedCar.savePrice = request.savePrice
     }
 
-
+    @Transactional
     fun deleteUsedCar(id : UUID)
     {
-        usedCarRepository.deleteById(id)
+        usedCarRepository.getReferenceById(id).delete()
     }
+
+    private fun getUsedCarEntity(id : UUID) : UsedCar = usedCarRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }
+
