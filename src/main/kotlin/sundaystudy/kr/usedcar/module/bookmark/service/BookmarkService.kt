@@ -30,7 +30,7 @@ class BookmarkService(
     fun saveBookmark(postId: UUID) {
         val member = memberRepository.getReferenceById(getUserId())
         val post = postRepository.getReferenceById(postId)
-        bookmarkRepository.saveAndFlush(Bookmark(
+        bookmarkRepository.save(Bookmark(
             post,
             member
         ))

@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.matching.service
 
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import sundaystudy.kr.usedcar.module.matching.dto.MatchingResponse
 import sundaystudy.kr.usedcar.module.matching.entity.Matching
@@ -7,6 +8,7 @@ import sundaystudy.kr.usedcar.module.matching.mapper.MatchingMapper
 import sundaystudy.kr.usedcar.module.matching.repository.MatchingRepository
 import sundaystudy.kr.usedcar.module.member.repository.MemberRepository
 import sundaystudy.kr.usedcar.module.member.service.AuthService
+import sundaystudy.kr.usedcar.module.member.service.MemberService
 import sundaystudy.kr.usedcar.module.post.repository.PostRepository
 import java.util.UUID
 
@@ -14,7 +16,7 @@ import java.util.UUID
 class MatchingService(
     private val matchingRepository: MatchingRepository,
     private val postRepository: PostRepository,
-    private val memberRepository: MemberRepository,
+    private val memberService: MemberService,
     private val authService: AuthService,
     private val matchingMapper: MatchingMapper,
     ) {
@@ -25,10 +27,11 @@ class MatchingService(
         return matchingMapper.toListResponse(matchingRepository.findAllByRequestMemberId(getLoginUserId()))
     }
 
+    @Transactional
     fun saveMatching(postId: UUID): MatchingResponse {
         val post = postRepository.getReferenceById(postId)
-        val requestUser = memberRepository.getReferenceById(getLoginUserId())
-        return matchingMapper.toResponse(matchingRepository.saveAndFlush(
+        val requestUser = memberService.getEntity(getLoginUserId())
+        return matchingMapper.toResponse(matchingRepository.save(
             Matching(
                 post,
                 requestUser,
