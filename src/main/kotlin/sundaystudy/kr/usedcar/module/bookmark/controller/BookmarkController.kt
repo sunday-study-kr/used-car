@@ -18,7 +18,7 @@ class BookmarkController(
 ) {
     @GetMapping("/")
     fun getBookmarkList(pageable: Pageable): ResponseEntity<PageableeResponse<BookmarkResponse>> {
-        return ResponseEntity.status(HttpStatus.OK).body(PageableeResponse(listOf(), pageable.pageNumber, pageable.offset, 0))
+        return ResponseEntity.status(HttpStatus.OK).body(PageableeResponse(bookmarkService.getBookmarkList(), pageable.pageNumber, pageable.offset, 0))
     }
 
     @PostMapping("/post/{id}")

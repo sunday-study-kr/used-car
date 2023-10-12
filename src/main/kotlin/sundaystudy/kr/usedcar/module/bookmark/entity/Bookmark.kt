@@ -6,19 +6,19 @@ import sundaystudy.kr.usedcar.global.audit.BaseTime
 import sundaystudy.kr.usedcar.module.post.entity.Post
 
 import sundaystudy.kr.usedcar.module.member.entity.Member
+import java.util.UUID
 
 @Entity
 class Bookmark(
-    @Id
-    @Column(columnDefinition = "BINARY(16)")
-    private val id: String,
+    @OneToOne
+    var post: Post? = null,
+    @ManyToOne
+var member: Member? = null
 ) : Auditable {
 
-    @OneToOne
-    var post: Post? = null
-
-    @ManyToOne
-    var member: Member? = null
+    @Id
+    @Column(columnDefinition = "BINARY(16)")
+    var id: UUID= UUID.randomUUID()
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
