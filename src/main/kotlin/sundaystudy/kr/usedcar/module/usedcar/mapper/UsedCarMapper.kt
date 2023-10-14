@@ -27,11 +27,11 @@ class UsedCarMapper {
         return ChangeOwner(request.changeDay)
     }
 
-    fun toOpponentAccident(request : OpponentAccidentDetail) : OpponentAccident{
+    fun toOpponentAccident(request : AccidentDetail) : OpponentAccident{
         return OpponentAccident(request.Day,request.partPrice,request.wagesPrice,request.coationPrice,request.totalPrice)
     }
 
-    fun toOwnerAccident(request : OwnerAccidentDetail) : OwnerAccident{
+    fun toOwnerAccident(request : AccidentDetail) : OwnerAccident{
         return OwnerAccident(request.Day,request.partPrice,request.wagesPrice,request.coationPrice,request.totalPrice)
     }
 
@@ -51,12 +51,12 @@ class UsedCarMapper {
         return ChangeOwnerDetail(changeOwner.changeDay)
     }
 
-    fun toOpponentAccidentDetail(opponentAccident: OpponentAccident) : OpponentAccidentDetail{
-        return OpponentAccidentDetail(opponentAccident.Day,opponentAccident.partPrice,opponentAccident.wagesPrice,opponentAccident.coationPrice,opponentAccident.totalPrice)
+    fun toOpponentAccidentDetail(opponentAccident: OpponentAccident) : AccidentDetail{
+        return AccidentDetail(opponentAccident.Day,opponentAccident.partPrice,opponentAccident.wagesPrice,opponentAccident.coationPrice,opponentAccident.totalPrice)
     }
 
-    fun toOwnerAccidentDetail(ownerAccident: OwnerAccident) : OwnerAccidentDetail{
-        return OwnerAccidentDetail(ownerAccident.Day,ownerAccident.partPrice,ownerAccident.wagesPrice,ownerAccident.coationPrice,ownerAccident.totalPrice)
+    fun toOwnerAccidentDetail(ownerAccident: OwnerAccident) : AccidentDetail{
+        return AccidentDetail(ownerAccident.Day,ownerAccident.partPrice,ownerAccident.wagesPrice,ownerAccident.coationPrice,ownerAccident.totalPrice)
     }
 
     fun toUnsubscribedDetail(unsubscribed : Unsubscribed) : UnsubscribedDetail{
