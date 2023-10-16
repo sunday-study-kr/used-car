@@ -8,6 +8,7 @@ import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 import sundaystudy.kr.usedcar.module.badge.entity.Badge
+import sundaystudy.kr.usedcar.module.post.entity.Post
 import java.util.*
 
 @Entity
@@ -43,6 +44,9 @@ class Member(
     @OneToMany(mappedBy = "member")
     var badges: MutableList<Badge> = mutableListOf()
         protected set
+
+    @OneToMany(mappedBy = "member")
+    var posts : MutableList<Post> = mutableListOf()
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()

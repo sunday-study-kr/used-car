@@ -56,7 +56,6 @@ class UsedCarService(
 
         return IdResponse(usedCar.id)
     }
-
     fun getUsedCar(id : UUID) : UsedCarResponse
     {
         val usedCar = getUsedCarEntity(id)
@@ -100,6 +99,6 @@ class UsedCarService(
         usedCarRepository.getReferenceById(id).delete()
     }
 
-    private fun getUsedCarEntity(id : UUID) : UsedCar = usedCarRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
+    fun getUsedCarEntity(id : UUID) : UsedCar = usedCarRepository.findByIdOrNull(id) ?: throw EntityNotFoundException()
 }
 
