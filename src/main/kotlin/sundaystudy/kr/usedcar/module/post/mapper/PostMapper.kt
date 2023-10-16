@@ -11,8 +11,12 @@ import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
 @Component
 class PostMapper {
 
-    fun toEntity(request : PostRequest) : Post{
-        return Post(0,0,0,request.introduce,request.dealAddress)
+    fun toEntity(request : PostRequest,member : Member,usedCar : UsedCar) : Post{
+        var post = Post(request.introduce,request.dealAddress)
+        post.addMember(member)
+        post.addUsedCar(usedCar)
+
+        return post
     }
 
     fun toPostResponse(post : Post) : PostResponse = PostResponse(post.id,post.member!!.id,post.usedCar!!.id

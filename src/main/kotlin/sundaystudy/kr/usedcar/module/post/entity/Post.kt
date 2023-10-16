@@ -13,18 +13,21 @@ import java.util.*
 @Where(clause = "deleted_at is null")
 @EntityListeners(AuditListener::class)
 class Post(
-    @Column(name = "chat")
-    var chat: Int,
-    @Column(name = "focus")
-    var focus: Int,
-    @Column(name = "look")
-    var look: Int,
     @Column(name = "introduce")
     var introduce: String,
     @Column(name = "deal_address")
     var dealAddress: String,
 
 ) : Auditable {
+
+    @Column(name = "chat")
+    var chat: Int = 0
+
+    @Column(name = "focus")
+    var focus: Int = 0
+
+    @Column(name = "look")
+    var look: Int = 0
 
     @Id
     @Column(columnDefinition = "BINARY(16)")

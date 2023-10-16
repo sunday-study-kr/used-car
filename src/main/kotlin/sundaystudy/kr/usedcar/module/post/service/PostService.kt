@@ -24,14 +24,7 @@ class PostService(
     @Transactional
     fun savePost(postRequest: PostRequest) : PostResponse
     {
-        val member = authService.getLoginUser()
-        val usedCar = usedCarService.getUsedCarEntity(postRequest.usedCarId)
-
-        val post : Post = postMapper.toEntity(postRequest)
-
-        post.addMember(member)
-        post.addUsedCar(usedCar)
-        return postMapper.toPostResponse(postRepository.save(post))
+       return postMapper.toPostResponse(postRepository.save(postMapper.toEntity(postRequest,authService.getLoginUser(),usedCarService.getUsedCarEntity(postRequest.usedCarId))))
     }
 
     fun getPostByMemberId(memberId : UUID) : List<PostResponse>
