@@ -24,10 +24,17 @@ class PraiseService(
     private val authService: AuthService,
     private val memberService: MemberService,
 ) {
+
+    @Transactional
     fun savePraise(praiseRequest: PraiseRequest): IdResponse {
         val praiser = authService.getLoginUser()
         val praiseReciever = memberService.getEntity(praiseRequest.memberId)
-        val praise = praiseRepository.save(praiseMapper.toEntity(praiseRequest, praiseReciever, praiser))
+
+        val praise = praiseRepository.findByMemberAndPraiser(praiseReciever, praiser)?.let {
+            it.increaseAmount()
+            it
+        } ?: praiseRepository.save(praiseMapper.toEntity(praiseRequest, praiseReciever, praiser))
+
         return IdResponse(praise.id)
     }
 
@@ -46,7 +53,7 @@ class PraiseService(
     @Transactional
     fun updatePraise(praiseUpdateRequest: PraiseUpdateRequest) {
         val praise = getEntity(praiseUpdateRequest.id)
-        praise.update(praiseUpdateRequest.content, praiseUpdateRequest.praiseType)
+        praise.update(praiseUpdateRequest.praiseType)
     }
     @Transactional
     fun deletePraise(id: UUID) =

@@ -1,6 +1,7 @@
 package sundaystudy.kr.usedcar.module.member.service
 
 import jakarta.persistence.EntityNotFoundException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
@@ -69,6 +70,5 @@ class AuthService(
     }
 
     fun getLoginUser(): Member =
-        memberRepository.findById(getLoginUserId())
-            .orElseThrow { EntityNotFoundException() }
+        memberRepository.findByIdOrNull(getLoginUserId()) ?: throw EntityNotFoundException()
 }

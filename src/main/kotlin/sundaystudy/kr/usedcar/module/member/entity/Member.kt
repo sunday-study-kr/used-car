@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.member.entity
 
+import com.github.f4b6a3.ulid.UlidCreator
 import jakarta.persistence.*
 import org.hibernate.annotations.Where
 import org.springframework.security.core.GrantedAuthority
@@ -19,7 +20,7 @@ class Member(
 ) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID()
+    val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 
     var nickname: String? = null
         protected set
@@ -57,6 +58,4 @@ class Member(
     fun organizeBadge(badge: Badge) {
         this.badges.add(badge)
     }
-
-    // TODO Double 필드 3개에 대한 업데이트 로직 함수 작성
 }

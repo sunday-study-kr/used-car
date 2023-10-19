@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.badge.controller
 
+import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,7 +14,7 @@ class BadgeController(
     private val badgeService: BadgeService,
 ) {
     @PostMapping
-    fun selectRepresentBadge(@RequestBody representBadgeRequest: RepresentBadgeRequest): ResponseEntity<Any> {
+    fun selectRepresentBadge(@RequestBody @Valid representBadgeRequest: RepresentBadgeRequest): ResponseEntity<Unit> {
         badgeService.selectRepresentBadge(representBadgeRequest)
         return ResponseEntity.noContent().build()
     }

@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.badge.entity
 
+import com.github.f4b6a3.ulid.UlidCreator
 import jakarta.persistence.*
 import org.hibernate.annotations.Where
 import sundaystudy.kr.usedcar.global.audit.AuditListener
@@ -25,7 +26,7 @@ class Badge(
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID()
+    val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 
     var isRepresent: Boolean = false
         protected set

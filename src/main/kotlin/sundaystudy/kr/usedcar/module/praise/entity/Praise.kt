@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.praise.entity
 
+import com.github.f4b6a3.ulid.UlidCreator
 import jakarta.persistence.*
 import org.hibernate.annotations.Where
 import sundaystudy.kr.usedcar.global.audit.AuditListener
@@ -16,9 +17,6 @@ class Praise(
     @Column(nullable = false)
     var praiseType: String,
 
-    @Lob
-    var content: String,
-
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     var member: Member,
@@ -29,7 +27,7 @@ class Praise(
 ) : Auditable {
     @Id
     @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID()
+    val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 
     var amount: Int = 1
         protected set
@@ -41,8 +39,7 @@ class Praise(
     @Embedded
     override var baseTime: BaseTime = BaseTime()
 
-    fun update(content: String, praiseType: String) {
-        this.content = content
+    fun update(praiseType: String) {
         this.praiseType = praiseType
     }
 }

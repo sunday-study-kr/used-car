@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.review.entity
 
+import com.github.f4b6a3.ulid.UlidCreator
 import jakarta.persistence.*
 import org.hibernate.annotations.Where
 import sundaystudy.kr.usedcar.global.audit.AuditListener
@@ -27,7 +28,7 @@ class Review(
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID()
+    val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()
