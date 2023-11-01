@@ -1,5 +1,6 @@
 package sundaystudy.kr.usedcar.module.review.controller
 
+import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,7 +18,7 @@ class ReviewController(
     private val reviewService: ReviewService,
 ) {
     @PostMapping
-    fun saveReview(@RequestBody reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
+    fun saveReview(@RequestBody @Valid reviewRequest: ReviewRequest): ResponseEntity<IdResponse> =
         ResponseEntity.status(HttpStatus.CREATED).body(reviewService.saveReview(reviewRequest))
 
     @GetMapping
@@ -33,13 +34,13 @@ class ReviewController(
         ResponseEntity.ok(reviewService.getAllReviewsByMemberId(memberId))
 
     @PutMapping
-    fun updateReview(@RequestBody reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Any> {
+    fun updateReview(@RequestBody @Valid reviewUpdateRequest: ReviewUpdateRequest): ResponseEntity<Unit> {
         reviewService.updateReview(reviewUpdateRequest)
         return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("{id}")
-    fun deleteReview(@PathVariable id: UUID): ResponseEntity<Any> {
+    fun deleteReview(@PathVariable id: UUID): ResponseEntity<Unit> {
         reviewService.deleteReview(id)
         return ResponseEntity.noContent().build()
     }

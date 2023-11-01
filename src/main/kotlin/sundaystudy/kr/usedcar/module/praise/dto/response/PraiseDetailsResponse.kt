@@ -5,5 +5,4 @@ import java.util.*
 data class PraiseDetailsResponse(
     var id: UUID,
     var praiseType: String,
-    var content: String,
 )

@@ -12,7 +12,6 @@ class PraiseMapper {
     fun toEntity(praiseRequest: PraiseRequest, member: Member, praiser: Member): Praise =
         Praise(
             praiseType = praiseRequest.praiseType,
-            content = praiseRequest.content,
             member = member,
             praiser = praiser
         )
@@ -31,7 +30,6 @@ class PraiseMapper {
     fun toDetailsResponse(praise: Praise): PraiseDetailsResponse =
         PraiseDetailsResponse(
             id = praise.id,
-            praiseType = praise.praiseType,
-            content = praise.content
+            praiseType = praise.praiseType
         )
 }
