@@ -3,7 +3,6 @@ package sundaystudy.kr.usedcar.module.post.controller
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.post.dto.request.PostRequest
 import sundaystudy.kr.usedcar.module.post.dto.response.PostResponse
 import sundaystudy.kr.usedcar.module.post.service.PostService
@@ -15,7 +14,7 @@ class PostController(
     private val postService: PostService
 ) {
     @PostMapping()
-    fun savePost(postRequest: PostRequest) : ResponseEntity<IdResponse>
+    fun savePost(postRequest: PostRequest) : ResponseEntity<PostResponse>
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.savePost(postRequest))
     }
