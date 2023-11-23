@@ -25,5 +25,6 @@ abstract class LoginTest {
         val member = Member(OAuth2Details("123456789", AuthProvider.KAKAO))
         loginUser = memberRepository.save(member)
         `when`(authService.getLoginUser()).thenReturn(loginUser)
+        `when`(authService.getLoginUserId()).thenReturn(loginUser.id)
     }
 }
