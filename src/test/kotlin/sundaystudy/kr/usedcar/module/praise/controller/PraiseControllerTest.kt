@@ -39,7 +39,7 @@ class PraiseControllerTest: RestDocsTest() {
         //when
         val perform = mockMvc.perform(
             post("/praises")
-                .content(toRequestBody(PraiseRequest("칭찬합니다~~", UUID.randomUUID(), "친절해요")))
+                .content(toRequestBody(PraiseRequest(UUID.randomUUID(), "친절해요")))
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -115,7 +115,7 @@ class PraiseControllerTest: RestDocsTest() {
     @DisplayName("칭찬 상세 조회 api가 수행되는가")
     fun getPraiseDetails() {
         //given
-        val expected = PraiseDetailsResponse(UUID.randomUUID(), "친절해요", "친절하게 설명해주셨어요")
+        val expected = PraiseDetailsResponse(UUID.randomUUID(), "친절해요")
         `when`(praiseService.getPraiseDetails(any(UUID::class.java))).thenReturn(expected)
 
         //when
@@ -148,7 +148,7 @@ class PraiseControllerTest: RestDocsTest() {
         //when
         val perform = mockMvc.perform(
             put("/praises")
-                .content(toRequestBody(PraiseUpdateRequest(UUID.randomUUID(), "친절해요", "완전 친절!!")))
+                .content(toRequestBody(PraiseUpdateRequest(UUID.randomUUID(), "친절해요")))
                 .header("Authorization", "Bearer 12asdf21435.asdfgafdsg231f.432t4243cf")
                 .contentType(MediaType.APPLICATION_JSON))
 

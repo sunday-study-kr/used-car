@@ -15,7 +15,7 @@ import java.util.*
 class Badge(
     val badgeName: String,
 
-    @JoinColumn
+    @JoinColumn(columnDefinition = "BINARY(16)")
     @ManyToOne(fetch = FetchType.LAZY)
     var member: Member,
 ) : Auditable {
@@ -44,7 +44,6 @@ class Badge(
     }
 
     private fun organizeMember(member: Member) {
-        this.member = member
         member.organizeBadge(this)
     }
 }

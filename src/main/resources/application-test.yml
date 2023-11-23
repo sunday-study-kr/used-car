@@ -12,10 +12,17 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        auto_quote_keyword: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        storage_engine: innodb
+        format_sql: true
+    generate-ddl: true
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:usedcar
+    url: jdbc:h2:mem:usedcar;MODE=MySQL;
     username: sa
     password:
 
