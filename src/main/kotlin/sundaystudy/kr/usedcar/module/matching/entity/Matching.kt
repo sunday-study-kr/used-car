@@ -5,7 +5,7 @@ import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
 import sundaystudy.kr.usedcar.module.member.entity.Member
 import sundaystudy.kr.usedcar.module.post.entity.Post
-import java.util.UUID
+import java.util.*
 
 @Entity
 class Matching(

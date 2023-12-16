@@ -31,7 +31,7 @@ class SecurityConfig(
             .httpBasic {
                 it.disable()
             }
-            .formLogin{
+            .formLogin {
                 it.disable()
             }
             .authorizeHttpRequests {
@@ -41,7 +41,7 @@ class SecurityConfig(
                     .authenticated()
             }
             .oauth2Login {
-                it.authorizationEndpoint{ endpoint ->
+                it.authorizationEndpoint { endpoint ->
                     endpoint.baseUri("/oauth2/authorize")
                 }
                 it.redirectionEndpoint { endpoint ->

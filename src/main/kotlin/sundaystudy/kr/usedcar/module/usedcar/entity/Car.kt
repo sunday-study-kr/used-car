@@ -23,12 +23,16 @@ class Car(
     var displacement: Int,
     @Column(name = "fuel_type")
     var fuelType: String,
+
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
+    var usedCar: UsedCar
 ) {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
-    var usedCar: UsedCar? = null
+    init {
+        usedCar.organizeCar(this)
+    }
 }

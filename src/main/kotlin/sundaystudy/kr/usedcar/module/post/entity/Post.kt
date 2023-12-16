@@ -15,8 +15,17 @@ import java.util.*
 class Post(
     @Column(name = "introduce")
     var introduce: String,
+
     @Column(name = "deal_address")
     var dealAddress: String,
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "used_car_id")
+    var usedCar: UsedCar,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    var member: Member
 
 ) : Auditable {
 
@@ -33,23 +42,20 @@ class Post(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "used_car_id")
-    var usedCar: UsedCar? = null
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    var member : Member? = null
-
     @Embedded
     override var baseTime: BaseTime = BaseTime()
 
-    fun addMember(member: Member){
+    init {
+        addMember(member)
+        addUsedCar(usedCar)
+    }
+
+    private fun addMember(member: Member) {
         this.member = member
         member.posts.add(this)
     }
 
-    fun addUsedCar(usedCar: UsedCar){
+    private fun addUsedCar(usedCar: UsedCar) {
         this.usedCar = usedCar
     }
 }

@@ -47,7 +47,7 @@ class Member(
         protected set
 
     @OneToMany(mappedBy = "member")
-    var posts : MutableList<Post> = mutableListOf()
+    var posts: MutableList<Post> = mutableListOf()
 
     @Embedded
     override var baseTime: BaseTime = BaseTime()

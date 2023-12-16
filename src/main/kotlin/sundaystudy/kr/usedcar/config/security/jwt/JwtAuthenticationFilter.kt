@@ -11,7 +11,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthenticationFilter(
     private val jwtValidator: JwtValidator
-): OncePerRequestFilter() {
+) : OncePerRequestFilter() {
     private val TOKEN_TAG: String = "Authorization"
     private val TOKEN_PREFIX: String = "Bearer "
     override fun doFilterInternal(

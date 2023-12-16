@@ -1,11 +1,17 @@
 package sundaystudy.kr.usedcar.module.bookmark.mapper
 
-import org.mapstruct.Mapper
+import org.springframework.stereotype.Component
 import sundaystudy.kr.usedcar.module.bookmark.dto.BookmarkResponse
 import sundaystudy.kr.usedcar.module.bookmark.entity.Bookmark
 
-@Mapper
-interface BookmarkMapper {
-    fun toResponseList(reviewList: List<Bookmark>): List<BookmarkResponse>
-    fun toResponse(bookmark: Bookmark): BookmarkResponse
+@Component
+class BookmarkMapper {
+    fun toResponseList(reviewList: List<Bookmark>): List<BookmarkResponse> =
+        reviewList.map(this::toResponse)
+
+    fun toResponse(bookmark: Bookmark): BookmarkResponse =
+        BookmarkResponse(
+            id = bookmark.id,
+            postId = bookmark.post!!.id
+        )
 }

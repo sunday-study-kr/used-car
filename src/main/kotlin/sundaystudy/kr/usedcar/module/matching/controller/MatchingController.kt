@@ -3,16 +3,12 @@ package sundaystudy.kr.usedcar.module.matching.controller
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import sundaystudy.kr.usedcar.global.dto.PageableeResponse
+import org.springframework.web.bind.annotation.*
+import sundaystudy.kr.usedcar.global.dto.IdResponse
 import sundaystudy.kr.usedcar.module.matching.dto.MatchingRequest
 import sundaystudy.kr.usedcar.module.matching.dto.MatchingResponse
 import sundaystudy.kr.usedcar.module.matching.service.MatchingService
-import java.util.UUID
+import java.util.*
 
 @RestController("matching")
 class MatchingController(
@@ -20,19 +16,17 @@ class MatchingController(
 ) {
 
     @GetMapping("/")
-    fun getMatchingList(pageable: Pageable): ResponseEntity<PageableeResponse<MatchingResponse>> {
-        return ResponseEntity.status(HttpStatus.OK).body(PageableeResponse(matchingService.getMatchingList(), pageable.pageNumber, pageable.offset, 0))
+    fun getMatchingList(pageable: Pageable): ResponseEntity<List<MatchingResponse>> {
+        return ResponseEntity.ok(matchingService.getMatchings())
     }
 
     @GetMapping("/{id}")
-    fun getMatching(@PathVariable("id") matchingId: String): ResponseEntity<MatchingResponse> {
-        return ResponseEntity.status(HttpStatus.OK).body(matchingService.getMatching(UUID.fromString(matchingId)))
+    fun getMatching(@PathVariable("id") matchingId: UUID): ResponseEntity<MatchingResponse> {
+        return ResponseEntity.status(HttpStatus.OK).body(matchingService.getMatching(matchingId))
     }
 
     @PostMapping("/")
-    fun saveMatching(@RequestBody request: MatchingRequest): ResponseEntity<MatchingResponse> {
-        return ResponseEntity.status(HttpStatus.OK).body(matchingService.saveMatching(
-            UUID.fromString(request.postId)
-        ))
+    fun saveMatching(@RequestBody request: MatchingRequest): ResponseEntity<IdResponse> {
+        return ResponseEntity.ok(matchingService.saveMatching(request))
     }
 }

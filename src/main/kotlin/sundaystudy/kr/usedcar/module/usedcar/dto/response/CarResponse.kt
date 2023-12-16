@@ -1,7 +1,5 @@
 package sundaystudy.kr.usedcar.module.usedcar.dto.response
 
-import jakarta.persistence.Column
-
 data class CarResponse(
     var carType: String,
     var company: String,

@@ -55,6 +55,7 @@ class PraiseService(
         val praise = getEntity(praiseUpdateRequest.id)
         praise.update(praiseUpdateRequest.praiseType)
     }
+
     @Transactional
     fun deletePraise(id: UUID) =
         getEntity(id).delete()

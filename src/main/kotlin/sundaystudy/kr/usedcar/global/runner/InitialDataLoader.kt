@@ -13,12 +13,15 @@ import java.io.InputStreamReader
 @Component
 class InitialDataLoader(
     private val jdbcTemplate: JdbcTemplate,
-): CommandLineRunner {
+) : CommandLineRunner {
     private val logger = LoggerFactory.getLogger(InitialDataLoader::class.java)
 
     override fun run(vararg args: String?) {
         jdbcTemplate.execute("use usedcar")
-        val isDataExist = jdbcTemplate.queryForObject("SELECT CASE WHEN COUNT(id) > 0 THEN true ELSE FALSE END AS has_daa FROM car", Boolean::class.java) ?: throw Exception("Cannot check `car` table")
+        val isDataExist = jdbcTemplate.queryForObject(
+            "SELECT CASE WHEN COUNT(id) > 0 THEN true ELSE FALSE END AS has_daa FROM car",
+            Boolean::class.java
+        ) ?: throw Exception("Cannot check `car` table")
 
         if (isDataExist === false) {
             val initialData = InputStreamReader(ClassPathResource("/initial.sql").inputStream)
@@ -40,6 +43,5 @@ class InitialDataLoader(
                 }
             )
         }
-
     }
 }
