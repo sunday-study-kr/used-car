@@ -11,23 +11,13 @@ import sundaystudy.kr.usedcar.module.usedcar.entity.UsedCar
 @Component
 class PostMapper {
 
-    fun toEntity(request : PostRequest,member : Member,usedCar : UsedCar) : Post{
-        var post = Post(request.introduce,request.dealAddress)
-        post.addMember(member)
-        post.addUsedCar(usedCar)
+    fun toEntity(request: PostRequest, member: Member, usedCar: UsedCar): Post =
+        Post(request.introduce, request.dealAddress, usedCar, member)
 
-        return post
-    }
+    fun toPostResponse(post: Post): PostResponse = PostResponse(
+        post.id, post.member.id, post.usedCar.id, post.chat, post.focus, post.look, post.introduce, post.dealAddress
+    )
 
-    fun toPostResponse(post : Post) : PostResponse = PostResponse(post.id,post.member!!.id,post.usedCar!!.id
-    ,post.chat,post.focus,post.look,post.introduce,post.dealAddress)
-
-    fun toPostListResponse(posts : MutableList<Post>) : MutableList<PostResponse> {
-        var responseList = mutableListOf<PostResponse>()
-        for(cur in posts){
-            responseList.add(toPostResponse(cur))
-        }
-
-        return responseList
-    }
+    fun toPostResponses(posts: List<Post>): List<PostResponse> =
+        posts.map(this::toPostResponse)
 }

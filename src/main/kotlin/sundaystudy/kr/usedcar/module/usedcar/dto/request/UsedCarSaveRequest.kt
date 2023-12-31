@@ -5,5 +5,5 @@ data class UsedCarSaveRequest(
     var price: Int,
     var savePrice: Int,
     var carSaveRequest: CarSaveRequest,
-    var insurance : InsuranceRequest
+    var insurance: InsuranceRequest
 )

@@ -14,7 +14,7 @@ class OAuth2UserServiceImpl(
     private val memberService: MemberService,
     private val attributeMapper: AttributeMapper,
     private val principleMapper: PrincipleMapper
-): DefaultOAuth2UserService() {
+) : DefaultOAuth2UserService() {
 
     override fun loadUser(userRequest: OAuth2UserRequest?): OAuth2User? {
         val attributes = super.loadUser(userRequest).attributes

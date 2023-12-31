@@ -6,5 +6,5 @@ data class UsedCarResponse(
     var price: Int,
     var savePrice: Int,
     var carResponse: CarResponse,
-    var insuranceDetail : InsuranceResponse
+    var insuranceDetail: InsuranceResponse
 )

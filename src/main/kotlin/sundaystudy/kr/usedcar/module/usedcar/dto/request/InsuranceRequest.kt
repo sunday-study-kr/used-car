@@ -1,6 +1,9 @@
 package sundaystudy.kr.usedcar.module.usedcar.dto.request
-import sundaystudy.kr.usedcar.module.usedcar.dto.detail.*
-import java.util.*
+
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.AccidentDetail
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.ChangeNumberDetail
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.ChangeOwnerDetail
+import sundaystudy.kr.usedcar.module.usedcar.dto.detail.UnsubscribedDetail
 
 data class InsuranceRequest(
     val isLoss: Boolean,
@@ -9,9 +12,9 @@ data class InsuranceRequest(
     val isRent: Boolean,
     val isSales: Boolean,
     val isPublic: Boolean,
-    var changeNumber : List<ChangeNumberDetail>,
-    var changeOwner : List<ChangeOwnerDetail>,
-    var opponentAccident : List<OpponentAccidentDetail>,
-    var ownerAccident : List<OwnerAccidentDetail>,
-    var unsubscribed : List<UnsubscribedDetail>
+    var changeNumber: List<ChangeNumberDetail>,
+    var changeOwner: List<ChangeOwnerDetail>,
+    var ownerAccident: List<AccidentDetail>,
+    var opponentAccident: List<AccidentDetail>,
+    var unsubscribed: List<UnsubscribedDetail>
 )

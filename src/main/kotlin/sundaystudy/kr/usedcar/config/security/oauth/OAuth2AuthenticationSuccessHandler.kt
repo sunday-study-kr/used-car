@@ -13,7 +13,7 @@ import sundaystudy.kr.usedcar.config.security.oauth.user.UserPrinciple
 @Component
 class OAuth2AuthenticationSuccessHandler(
     private val jwtCookieProvider: JwtCookieProvider,
-): SimpleUrlAuthenticationSuccessHandler() {
+) : SimpleUrlAuthenticationSuccessHandler() {
     @Value("\${app.auth.authorizedRedirectUri}")
     private lateinit var REDIRECT_URI: String
 
@@ -35,7 +35,7 @@ class OAuth2AuthenticationSuccessHandler(
         response: HttpServletResponse?,
         authentication: Authentication
     ): String = UriComponentsBuilder.fromUriString(REDIRECT_URI)
-            .build().toUriString()
+        .build().toUriString()
 
 
     protected fun clearAuthenticationAttributes(request: HttpServletRequest?, response: HttpServletResponse?) {

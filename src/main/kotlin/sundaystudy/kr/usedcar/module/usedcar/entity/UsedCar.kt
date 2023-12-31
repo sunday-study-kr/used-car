@@ -5,8 +5,7 @@ import org.hibernate.annotations.Where
 import sundaystudy.kr.usedcar.global.audit.AuditListener
 import sundaystudy.kr.usedcar.global.audit.Auditable
 import sundaystudy.kr.usedcar.global.audit.BaseTime
-
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Where(clause = "deleted_at is null")
@@ -23,7 +22,7 @@ class UsedCar(
     @Column(name = "save_price")
     var savePrice: Int,
 
-) : Auditable {
+    ) : Auditable {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
@@ -33,20 +32,25 @@ class UsedCar(
     override var baseTime: BaseTime = BaseTime()
 
     @JoinColumn(name = "car_id")
-    @OneToOne(fetch = FetchType.LAZY , cascade = [CascadeType.PERSIST , CascadeType.MERGE])
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var car: Car? = null
 
     @JoinColumn(name = "insurance_id")
-    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST , CascadeType.MERGE])
+    @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     var insurance: Insurance? = null
 
-    fun addCar(car : Car){
+    fun organizeCar(car: Car) {
         this.car = car
         car.usedCar = this
     }
 
-    fun addInsurance(insurance: Insurance){
+    fun organizeInsurance(insurance: Insurance) {
         this.insurance = insurance
         insurance.usedCar = this
+    }
+
+    fun updatePrice(price: Int, savePrice: Int) {
+        this.price = price
+        this.savePrice = savePrice
     }
 }

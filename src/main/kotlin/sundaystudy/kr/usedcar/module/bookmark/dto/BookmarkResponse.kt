@@ -1,5 +1,8 @@
 package sundaystudy.kr.usedcar.module.bookmark.dto
 
+import java.util.*
+
 data class BookmarkResponse(
-    val bookmarkId: String,
+    val id: UUID,
+    var postId: UUID
 )

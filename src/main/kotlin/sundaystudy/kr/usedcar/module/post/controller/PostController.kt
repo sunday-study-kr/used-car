@@ -14,28 +14,23 @@ class PostController(
     private val postService: PostService
 ) {
     @PostMapping()
-    fun savePost(postRequest: PostRequest) : ResponseEntity<PostResponse>
-    {
+    fun savePost(postRequest: PostRequest): ResponseEntity<PostResponse> {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.savePost(postRequest))
     }
 
     @GetMapping("/member/{id}")
-    fun getPostByMemberId(@PathVariable id : UUID) : ResponseEntity<List<PostResponse>>
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(postService.getPostByMemberId(id))
+    fun getPostByMemberId(@PathVariable id: UUID): ResponseEntity<List<PostResponse>> {
+        return ResponseEntity.ok(postService.getPostByMemberId(id))
     }
 
     @GetMapping("/{id}")
-    fun getPostById(@PathVariable id : UUID) : ResponseEntity<PostResponse>
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(postService.getPostById(id))
+    fun getPostById(@PathVariable id: UUID): ResponseEntity<PostResponse> {
+        return ResponseEntity.ok(postService.getPostById(id))
     }
 
     @DeleteMapping("/{id}")
-    fun deletePostById(@PathVariable id :UUID) : ResponseEntity<Unit>
-    {
+    fun deletePostById(@PathVariable id: UUID): ResponseEntity<Unit> {
         postService.deletePostById(id)
-
-        return ResponseEntity.status(HttpStatus.OK).body(Unit)
+        return ResponseEntity.noContent().build()
     }
 }

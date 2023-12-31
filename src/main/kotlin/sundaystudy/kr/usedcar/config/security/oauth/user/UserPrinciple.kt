@@ -9,7 +9,7 @@ class UserPrinciple(
     private val id: UUID,
     private val authorities: MutableCollection<out GrantedAuthority>,
     private val attributes: MutableMap<String, Any> = mutableMapOf()
-): UserDetails, OAuth2User {
+) : UserDetails, OAuth2User {
     override fun getName(): String = id.toString()
 
     override fun getAttributes(): MutableMap<String, Any> = attributes
